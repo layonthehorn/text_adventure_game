@@ -40,7 +40,12 @@ if (operating == 'Linux' or operating == "Darwin") and not ('ANDROID_ARGUMENT' i
         print("You need to install xdg to allow this program to run, please read the manual.\npip install xdg")
         exit(0)
     # save location and clear if on linux or mac
-    save_dir = f"{XDG_CONFIG_HOME}/vern_saves"
+    if XDG_CONFIG_HOME is None:
+        save_dir = f"/home/{getpass.getuser()}/.config/vern_saves"
+    else:
+        save_dir = f"{XDG_CONFIG_HOME}/vern_saves"
+
+
     def clear(): os.system("clear")
 
 elif operating == 'Windows':
