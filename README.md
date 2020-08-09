@@ -12,6 +12,8 @@ there are no failure states so just keep trying and you'll figure it out.
 This game does require at least Python 3.7 for the F-strings to function. Otherwise, you will encounter hard crashes.
 <br>You'll need to install _colorama_ for all systems and then _xdg_ if you are using Linux.
 
+I have create two setup scripts, one for linux and one for windows. The ps1 script should be run in PowerShell and 
+requires you have enabled unsigned scripts "set-executionpolicy remotesigned"
 <br>On Windows you should run this in either CMD or PowerShell for the screen clearing to work.
 <br>On Linux it should work out of the box independent of what terminal emulator you're using.
 <br>Mac users should run it in their terminal of choice. I don't have a Mac to test with sadly.
