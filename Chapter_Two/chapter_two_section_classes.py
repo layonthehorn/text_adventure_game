@@ -4,6 +4,8 @@ import random
 import Chapter_Two.chapter_two_room_classes as rooms
 import Chapter_Two.chapter_two_npc_classes as npc
 from Chapter_Two.exception_class import LocationError, NPCLocationError, ChangeSectionError, RedundantMoveError, MapMatchError
+import colorama
+colorama.init()
 
 
 # Player Class
@@ -11,8 +13,8 @@ class PlayerClass:
     """This is the main player class. It holds the player inventory and score among other things."""
 
     # class variables for print formatting
-    bold = '''\033[1m'''
-    end = '''\033[0;0m'''
+    bold = colorama.Style.BRIGHT
+    end = colorama.Style.NORMAL
 
     # dictionaries used for formatting the maps
     map_dict = {"inn": {"IE": "inn entrance", "IR": "inn room"},
@@ -479,11 +481,13 @@ class RoomSystem:
         # room update trackers
         self.room_booleans = {"room rented": False,
                               "player bathed": False,
-                              "office opened": False,
-
-                              # first entry events
-                              "gen work room": False
+                              "office opened": False
                               }
+        self.entry_events_dict = {
+            # first entry events
+            "gen work room": False,
+            "bath house first": False
+                            }
         self.random_counter = 0
 
         self.player = player
@@ -654,8 +658,6 @@ class RoomSystem:
         self.time_wait_events()
         # cross room changes checker
         self.cross_room_changes()
-        # checks for special events
-        self.first_entered_events()
         npc_deletion = []
         # checks each NPC that can move
         for name in self.npc_roster:
@@ -707,11 +709,14 @@ class RoomSystem:
 
     def first_entered_events(self):
         # if all are triggered it stops running all the checks
-        if not all([self.room_booleans["bath house first"]]):
-            if self.player.location == "work room" and not self.room_booleans["gen work room"]:
+        if not all(self.entry_events_dict.values()):
+            if self.player.location == "work room" and not self.entry_events_dict["gen work room"]:
                 print("As you enter the room an odd looking animal grabs the tool bag and leaps out a window."
                       "\nDamn it. Now how am I going to get that machine fixed? I need to find that creature.")
-                self.room_booleans["gen work room"] = True
+                self.entry_events_dict["gen work room"] = True
+            elif self.player.location == "bath house" and not self.entry_events_dict["bath house first"]:
+                print("First entry event in bath house.")
+                self.entry_events_dict["bath house first"] = True
 
     def cross_room_changes(self):
         # updates the game rooms if you rent a room

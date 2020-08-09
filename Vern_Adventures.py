@@ -1,10 +1,15 @@
-#!/usr/bin/python3
+#!/home/layonthehorn/PycharmProjects/Adventure-Game/venv/bin/python3.8
 from Chapter_One.chapter_one import ChapterOne
 from Chapter_Two.chapter_two import ChapterTwo
+from sys import exit
 import os
-from os import environ
 import platform
 import getpass
+try:
+    import colorama
+except ImportError:
+    print("You need to install colorama for this game to work, please read the manual.\npip install colorama")
+
 
 # Temporary ascii art from https://ascii.co.uk/art/lion
 ascii_image = """                 
@@ -27,10 +32,15 @@ ascii_image = """
 
 
 operating = platform.system()
-if (operating == 'Linux' or operating == "Darwin") and not ('ANDROID_ARGUMENT' in environ or 'ANDROID_STORAGE' in environ):
+if (operating == 'Linux' or operating == "Darwin") and not ('ANDROID_ARGUMENT' in os.environ or 'ANDROID_STORAGE' in os.environ):
     print("Found Linux or Mac.")
+    try:
+        from xdg import XDG_CONFIG_HOME
+    except ImportError:
+        print("You need to install xdg to allow this program to run, please read the manual.\npip install xdg")
+        exit(0)
     # save location and clear if on linux or mac
-    save_dir = f"/home/{getpass.getuser()}/.config/vern_saves"
+    save_dir = f"{XDG_CONFIG_HOME}/vern_saves"
     def clear(): os.system("clear")
 
 elif operating == 'Windows':
@@ -39,7 +49,7 @@ elif operating == 'Windows':
     save_dir = f"C:/Users/{getpass.getuser()}/Documents/vern_saves"
     def clear(): os.system("cls")
 
-elif 'ANDROID_ARGUMENT' in environ or 'ANDROID_STORAGE' in environ:
+elif 'ANDROID_ARGUMENT' in os.environ or 'ANDROID_STORAGE' in os.environ:
     print("Found Android.")
     # android system found
     save_dir = os.path.join(os.getcwd(), "vern_saves")

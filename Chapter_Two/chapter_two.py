@@ -3,14 +3,16 @@ import re
 from os import path
 import Chapter_Two.chapter_two_section_classes as sections
 import pprint
+import colorama
+colorama.init()
 
 
 class ChapterTwo:
     """This is a text adventure game, chapter one. All that is needed is to initialize it with a save directory and a
 command to clear the screen."""
     under_line = '\033[4m'
-    bold = '\033[1m'
-    end = '\033[0m'
+    bold = colorama.Style.BRIGHT
+    end = colorama.Style.NORMAL
     commands = 'Verbs: look, inv(entory), time, wallet, get, oper(ate), com(bine), drop, score, use, go, save, end, help, stat'
 
     def __init__(self, save_dir, clear_func, testing=False):
@@ -130,6 +132,8 @@ command to clear the screen."""
 
                 print("_" * len(self.commands))
                 print(f"{self.bold + self.commands + self.end}")
+                # checks for special events
+                self.rooms.first_entered_events()
                 player_choice = input("").lower()
                 self.clear()
                 # general actions shared by rooms

@@ -2,12 +2,13 @@
 A WIP adventure game built in python. 
 
 ## Setting Up
-This game does not require anything special installed with pip but does require at <br>
-least Python 3.7 for the F-strings to function. Otherwise, you will encounter hard crashes.
-
+This game does require at least Python 3.7 for the F-strings to function. Otherwise, you will encounter hard crashes.
+<br>You'll need to install _colorama_ for all systems and then _xdg_ if you are using Linux.
 ## How to play
-You have to try and get out of a mall and join your friends outside. Use the commands listed to go room to room and solve puzzles.
+Use the commands listed to go room to room and solve puzzles.
 
+- Chapter One: You have to try and get out of a mall and join your friends outside. 
+- Chapter Two: You need to collect enough money to leave town.
 ### Commands
 - look {item}: Looks at things. room, map, objects. 
 - inv(entory): Checks your inventory and prints descriptions out.

@@ -3,6 +3,8 @@ import random
 import platform
 import time
 from Chapter_Two.exception_class import LocationError
+import colorama
+colorama.init()
 
 
 # allows me to clear the screen when playing
@@ -123,8 +125,8 @@ class FunctionClass:
     """Never to be called. Only used for giving all other classes the same methods."""
 
     # class variables for print formatting
-    bold = '''\033[1m'''
-    end = '''\033[0;0m'''
+    bold = colorama.Style.BRIGHT
+    end = colorama.Style.NORMAL
     look_at_remarks = ("I can't look at the {0}.", "What {0}?")
     oper_remarks = ("I can't operate the {0}.", "How would I operate the {0}?")
     go_to_remarks = ("I can't go to {0}.", "Where is {0}?")
