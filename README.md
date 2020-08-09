@@ -11,14 +11,21 @@ Use the commands listed to go room to room and solve puzzles.
 - Chapter Two: You need to collect enough money to leave town.
 ### Commands
 - look {item}: Looks at things. room, map, objects. 
-- inv(entory): Checks your inventory and prints descriptions out.
+<br>**Examples**, "look room", "look map", "look robot"
 - get {item}: Gets items from room.
+<br>**Examples**, "get fuse", "get map", "get wrench"
 - oper(ate) {object}: How you use objects: doors, computers, and talk to NPCs.
+<br>**Examples**, "oper door", "oper robot", "oper shopkeeper"
 - com(bine) {item} with/on {item}: allows you to combine items. Use 'self' to use an item on you.
+<br>**Examples**, "com box with cat", "com gun with ammo", "com gun on self"
 - drop {item}: Allows you to get rid of an item.
-- score: Allows player to check current progress in game.
-- use {item} With/on {item}: how you use things with other things.
+<br>**Examples**, "drop meat", "drop self", "drop grenade"
+- use {item} With/on {object}: how you use things with other things.
+<br>**Examples**, "use gun on guard", "use wrench on robot", "use self on lock"
 - go {location}: How you change rooms.
+<br>**Examples**, "go side room", "go bunker", "go outside"
+- inv(entory): Checks your inventory and prints descriptions out.
+- score: Allows player to check current progress in game.
 - save: How you save your game.
 - hint: Gives you a hint towards finishing the game.
 - help: Prints this list of commands.
