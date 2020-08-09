@@ -112,6 +112,26 @@ class FunctionClass:
                 print(f"There is a(n) ", end="")
                 print(self.bold, item, self.end)
 
+    # prints what you can look at
+    def print_look(self):
+        print("__________________")
+        look_list = ""
+        print("I could look at...")
+        for thing in self.look_dict:
+            look_list += f"'{self.bold + thing + self.end}', "
+        print(look_list)
+        print("_" * len(look_list))
+
+    # prints where you can go
+    def print_locations(self):
+        go_list = ""
+        print("I could go to...")
+        for location in self.go_dict:
+            go_list += f"'{self.bold + location + self.end}', "
+        print(go_list)
+        if self.inventory:
+            print("_" * len(go_list))
+
 
 # Player Class
 class PlayerClass:
@@ -128,6 +148,7 @@ class PlayerClass:
         self.player_score = 0
         self.mane_brushed = False
         self.generator_working = False
+        self.changed_location = False
         self.fish_counter = 0
         self.use_remarks = ("I was useful after all.", "I feel used...", "I never knew I could use myself.",
                             "At least I didn't ruffle my mane.", "I think I'm still in one piece after that.")
@@ -222,6 +243,7 @@ class PlayerClass:
         elif location != "end" and location != "exit":
             print(f"You have gone to the {location}.")
             self.__location = location
+            self.changed_location = True
 
         # if you go to the exit or end, does not print anything
         else:
@@ -429,7 +451,8 @@ class Bunker(FunctionClass):
               "\nand there is a 'door' that appears to be locked. Maybe it’s connected to that fuse 'box'?.")
         if self.door_opened:
             print("The door to 'outside' is open.")
-
+        self.print_look()
+        self.print_locations()
         self.print_items()
 
     # this prints a description of the fuse box
@@ -545,6 +568,8 @@ class ComputerRoom(FunctionClass):
                   "\nThere is a 'light' switch by the entryway. In the corner is an old 'computer' which appears to still "
                   "\nbe operational. You can get back to the 'bunker' too.")
             print("There is an old 'safe' of some sort too.")
+            self.print_look()
+            self.print_locations()
             self.print_items()
         else:
             print("There's a 'light switch' on the wall and an exit back to the 'bunker' \nbut otherwise it's too dark "
@@ -702,6 +727,8 @@ class MainPlaza(FunctionClass):
             print("I can get 'upstairs' now at least. The 'gate' is unlocked now.")
         else:
             print("The path 'upstairs' is shut for now. The 'gate' is locked.")
+        self.print_look()
+        self.print_locations()
         self.print_items()
 
     def print_description_door(self):
@@ -847,6 +874,8 @@ class SmallDen(FunctionClass):
         print("There is a dead body of an 'animal' here.")
         if self.barn_looked:
             print("And a 'work bench' too.")
+        self.print_look()
+        self.print_locations()
         self.print_items()
 
     # print description of dead body
@@ -973,6 +1002,8 @@ class WestWing(FunctionClass):
         else:
             print("The 'kiosk' is happy with your offering.")
         print("You can go to 'toy shop', 'main plaza', 'pet shop', and 'cemetery.")
+        self.print_look()
+        self.print_locations()
         self.print_items()
 
     def print_description_kiosk(self):
@@ -1065,6 +1096,8 @@ class PetShop(FunctionClass):
         if "mane brush" in self.inventory:
             print("I might need a clean up and that brush looks handy.")
 
+        self.print_look()
+        self.print_locations()
         self.print_items()
 
     def print_description_fish(self):
@@ -1155,6 +1188,8 @@ class ToyShop(FunctionClass):
         if "soldering wire" in self.inventory:
             print("There's old wire used to repair things here too.")
         print("You can go back to the 'west wing' from here.")
+        self.print_look()
+        self.print_locations()
         self.print_items()
 
     def print_description_crane(self):
@@ -1269,6 +1304,8 @@ class Cemetery(FunctionClass):
         if not self.first_entered:
             print("You don't think you should remove anything from here.")
             self.first_entered = True
+        self.print_look()
+        self.print_locations()
         self.print_items()
 
     def print_description_graves(self):
@@ -1329,6 +1366,8 @@ class UpstairsHallway(FunctionClass):
         self.oper_dict = {
             "book": self.read_book}
 
+        self.print_look()
+        self.print_locations()
         self.use_dict = {}
 
     def __str__(self):
@@ -1468,6 +1507,8 @@ class AnimalDen(FunctionClass):
             print("It took my meat and left. I'll have to get more and use something on it.")
             self.meat_just_taken = False
         print("You can go back to the 'hallway'.")
+        self.print_look()
+        self.print_locations()
         self.print_items()
 
     # Vern talking about the odd hole in the wall
@@ -1557,6 +1598,8 @@ class Bathroom(FunctionClass):
               "\nisn’t much better either. There is an old first aid 'cabinet' on the wall and a 'hand dryer' along side it. ")
         print("There is an old nasty looking 'mirror' on the wall.")
         print("You can go back to the 'hallway'.")
+        self.print_look()
+        self.print_locations()
         self.print_items()
 
     # bool will be if player has brushed mane
@@ -1654,6 +1697,8 @@ class ShoeStore(FunctionClass):
             self.first_entered = True
 
         print("You can go back the the 'hallway' from here.")
+        self.print_look()
+        self.print_locations()
         self.print_items()
 
     def print_description_elevator(self):
@@ -1777,6 +1822,8 @@ class BasementEntry(FunctionClass):
         else:
             print("You'll have to figure out how to open the door.")
         print("You can go back 'up' to the 'shoe store'.")
+        self.print_look()
+        self.print_locations()
         self.print_items()
 
     def print_description_pad(self):
@@ -1891,6 +1938,8 @@ class BasementGenRoom(FunctionClass):
             print("There is a large panel with spaces for four large fuses. You should keep your eyes out for them.")
             print("There is a 'spec' sheet by it you might want to take note of.")
         print("You can go back to the 'basement entry'")
+        self.print_look()
+        self.print_locations()
         self.print_items()
 
     def print_description_generator(self):

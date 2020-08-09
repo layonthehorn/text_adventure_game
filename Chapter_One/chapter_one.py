@@ -2,14 +2,17 @@ import pickle
 import re
 from os import path
 from Chapter_One.chapter_one_classes import PlayerClass, Bunker, ComputerRoom, MainPlaza, SmallDen, WestWing, ToyShop, PetShop, Cemetery, UpstairsHallway, AnimalDen, Bathroom, ShoeStore, BasementEntry, BasementGenRoom
+import colorama
+colorama.init()
 
 
 class ChapterOne:
     """This is a text adventure game, chapter one. All that is needed is to initialize it with a save directory and a
 command to clear the screen."""
     under_line = '\033[4m'
-    bold = '\033[1m'
-    end = '\033[0m'
+    bold = colorama.Style.BRIGHT
+    end = colorama.Style.NORMAL
+    commands = 'Verbs look, inv(entory), get, oper(ate), com(bine), drop, score, use, go, save, end, help, stat'
 
     def __init__(self, save_dir, clear_func, testing=False):
 
@@ -207,7 +210,14 @@ command to clear the screen."""
             # if you reach the exit then don't ask for actions from player
             if self.player.location != self.exit_name:
 
-                print(f"{self.bold+'Verbs look, inv(entory), get, oper(ate), com(bine), drop, score, use, go, save, end, help, stat'+self.end}")
+                if self.player.changed_location:
+
+                    # displays the look rooms result when you change rooms
+                    loc_name = self.switcher_dictionary.get(self.player.location)
+                    loc_name.print_description_room()
+                    self.player.changed_location = False
+                print("_" * len(self.commands))
+                print(f"{self.bold + self.commands + self.end}")
                 player_choice = input("").lower()
                 self.clear()
                 # general actions shared by rooms
