@@ -1,9 +1,20 @@
 # Adventure-Game
-A WIP adventure game built in python. 
+A WIP adventure game built in python. There should be no hard or soft locks on winning. 
+If you find one then it's a bug and needs to be reported to the github repo as an
+issue. 
+
+This is largely inspired by the text adventures of old and wanting to make my own game
+but lacking any graphical art producing skills. So I figured I'd make a 
+text adventure with my own brand of humor and adventure. You can't die and 
+there are no failure states so just keep trying and you'll figure it out.
 
 ## Setting Up
 This game does require at least Python 3.7 for the F-strings to function. Otherwise, you will encounter hard crashes.
 <br>You'll need to install _colorama_ for all systems and then _xdg_ if you are using Linux.
+
+<br>On Windows you should run this in either CMD or PowerShell for the screen clearing to work.
+<br>On Linux it should work out of the box independent of what terminal emulator you're using.
+<br>Mac users should run it in their terminal of choice. I don't have a Mac to test with sadly.
 ## How to play
 Use the commands listed to go room to room and solve puzzles.
 
