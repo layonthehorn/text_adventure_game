@@ -1,11 +1,11 @@
 echo "Setting up VENV."
-python3 -m venv ..\env
+python3 -m venv %~dp0\..\env
 
 echo "Updating pip"
-..\env\bin\pip install --upgrade pip
+%~dp0\..\env\bin\pip install --upgrade pip
 
 echo "Installing Packages to VENV"
-..\env\bin\pip install xdg colorama
+%~dp0\..\env\bin\pip install xdg colorama
 
 echo "Setup complete"
 pause
