@@ -1379,6 +1379,8 @@ class UpstairsHallway(FunctionClass):
               "\nsome time, judging by the repurposed 'furniture' and empty food packaging all over the floor. Whoever "
               "\nlived here defended it fiercely, judging by all the old casings and bullet holes.")
         print("You can go to 'down stairs', 'shoe store', 'animal den', and 'bathroom'.")
+        self.print_look()
+        self.print_locations()
         self.print_items()
 
     # for look furn
