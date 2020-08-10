@@ -176,22 +176,25 @@ class FunctionClass:
                 self.print_random_phrase(self.go_to_remarks, go)
         else:
             self.print_random_phrase(self.go_to_remarks, go)
+        # allows using item on objects
 
-    # allows using item on objects
     def get_use_commands(self, use_list):
         item = use_list[0]
         room_object = use_list[1]
         # you have to enter at least three letters
-        if len(room_object) >= 3:
-            for key in self.use_dict:
-                if room_object in key:
-                    use_command = self.use_dict.get(key)
-                    use_command(item)
-                    break
+        if item in self.player_object.inventory:
+            if len(room_object) >= 3:
+                for key in self.use_dict:
+                    if room_object in key:
+                        use_command = self.use_dict.get(key)
+                        use_command(item)
+                        break
+                else:
+                    print(f"I can't find the {room_object}.")
             else:
-                self.print_random_phrase(self.use_remarks, room_object)
+                print(f"What is a(n) {room_object}.")
         else:
-            self.print_random_phrase(self.use_remarks, room_object)
+            print(f"I don't have a(n) {item}.")
 
     # gives item to player
     def get_item(self, item):

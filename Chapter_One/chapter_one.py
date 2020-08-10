@@ -392,6 +392,7 @@ command to clear the screen."""
                 if '' in choice_list:
                     choice_list.remove('')
                 loc_name.get_use_commands(choice_list)
+
             except IndexError:
                 print("Use what with what?")
 
