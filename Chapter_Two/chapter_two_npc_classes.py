@@ -2,6 +2,8 @@ from abc import ABC, abstractmethod
 from Chapter_Two.exception_class import ReadOnlyError, ChangeNPCLocationError
 import os
 import platform
+import colorama
+colorama.init()
 
 
 # allows me to clear the screen when playing
@@ -17,8 +19,8 @@ def clear():
 class ShopFunctions:
     """A class for giving shops the needed functions."""
     # class variables for print formatting
-    bold = '''\033[1m'''
-    end = '''\033[0;0m'''
+    bold = colorama.Style.BRIGHT
+    end = colorama.Style.NORMAL
 
     # general shop keeper function
     def shop_keeper(self, message="Welcome to my shop!"):
