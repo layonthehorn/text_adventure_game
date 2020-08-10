@@ -2,6 +2,8 @@ import time
 import random
 import os
 import platform
+import colorama
+colorama.init()
 
 
 # allows me to clear the screen when playing
@@ -20,8 +22,8 @@ class FunctionClass:
     """Never to be called. Only used for giving all other classes the same methods."""
 
     # class variables for print formatting
-    bold = '''\033[1m'''
-    end = '''\033[0;0m'''
+    bold = colorama.Style.BRIGHT
+    end = colorama.Style.NORMAL
 
     # allows getting a print function form the look dictionary.
     def get_look_commands(self, look_at):
