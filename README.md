@@ -1,7 +1,7 @@
 # Adventure-Game
 A WIP adventure game built in python. There should be no hard or soft locks on winning. 
 If you find one then it's a bug and needs to be reported to the github repo as an
-issue. 
+issue.   
 
 This is largely inspired by the text adventures of old and wanting to make my own game
 but lacking any graphical art producing skills. So I figured I'd make a 
