@@ -1,4 +1,3 @@
-#!/home/layonthehorn/PycharmProjects/text_adventure_game/venv/bin/python3.8
 from Chapter_One.chapter_one import ChapterOne
 from Chapter_Two.chapter_two import ChapterTwo
 from sys import exit
