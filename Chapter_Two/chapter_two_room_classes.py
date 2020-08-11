@@ -75,7 +75,7 @@ class RandomEvent:
             "weapons storage": ["The glint of sun light off chrome plated weapons momentarily blinds you."],
             "work room": [],
             "freezer": [],
-            "general storage": [],
+            "general storage": ["The cobwebs blow slightly in the dusty breeze."],
 
             # tower rooms random events
             "tower entrance": [],
