@@ -63,12 +63,15 @@ class RandomEvent:
             # ruins random events
             "ruined street": ["You spot a small rodent running across the street into some nearby bushes.",
                               "A dog looks at you nervously before running off down the street."],
-            "ruined office": [],
-            "ruined house": [],
-            "ruined garage": [],
+            "ruined office": ["The room creaks loudly, making you nervous.",
+                              "You hear the faint sound of water dripping somewhere in the room."],
+            "ruined house": ["A large spider scuttles quickly across one of the walls,"
+                             "\ntaking refuge behind one of the curtains."],
+            "ruined garage": ["The scent of old oil and fuel hits your nose.",
+                              "You hear the sounds of something running around in the ceiling."],
 
             # garage upstairs random events
-            "break room": [],
+            "break room": ["A musty smell hits your nose, making you feel a little nauseous."],
             "managers office": [],
             "balcony": [],
 
