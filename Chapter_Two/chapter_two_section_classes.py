@@ -486,7 +486,8 @@ class RoomSystem:
         self.entry_events_dict = {
             # first entry events
             "gen work room": False,
-            "bath house first": False
+            "bath house first": False,
+            "garage entry": False
                             }
         self.random_counter = 0
 
@@ -713,10 +714,20 @@ class RoomSystem:
             if self.player.location == "work room" and not self.entry_events_dict["gen work room"]:
                 print("As you enter the room an odd looking animal grabs the tool bag and leaps out a window."
                       "\nDamn it. Now how am I going to get that machine fixed? I need to find that creature.")
+                time.sleep(1)
                 self.entry_events_dict["gen work room"] = True
             elif self.player.location == "bath house" and not self.entry_events_dict["bath house first"]:
-                print("First entry event in bath house.")
+                print("The large pipe feeding the baths suddenly springs a leak. The owner grumbles and looks you over"
+                      "\nIf I didn't know any better I'd think you were a black cat, he mutters."
+                      "\nI'll need to fix that before I can get cleaned up from the road.")
                 self.entry_events_dict["bath house first"] = True
+                time.sleep(1)
+            elif self.player.location == "ruined garage" and not self.entry_events_dict["garage entry"]:
+                print("As you open the door to the inside and walk in, you accidentally knock over a large tool chest."
+                      "\nYou're tail frizzes up and you jump back. When you're eyes fall upon the tool chest, you feel"
+                      "rather silly.")
+                self.entry_events_dict["garage entry"] = True
+                time.sleep(1)
 
     def cross_room_changes(self):
         # updates the game rooms if you rent a room
