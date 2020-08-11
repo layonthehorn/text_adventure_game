@@ -61,7 +61,8 @@ class RandomEvent:
                            "The large mansion gates creak eerily in the wind."],
 
             # ruins random events
-            "ruined street": [],
+            "ruined street": ["You spot a small rodent running across the street into some nearby bushes.",
+                              "A dog looks at you nervously before running off down the street."],
             "ruined office": [],
             "ruined house": [],
             "ruined garage": [],
