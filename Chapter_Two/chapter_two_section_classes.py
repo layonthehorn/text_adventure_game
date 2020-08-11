@@ -489,10 +489,12 @@ class RoomSystem:
             "bath house first": False,
             "garage entry": False
                             }
-        self.random_counter = 0
-
-        self.player = player
+        # random event seed
+        self.random_counter = random.randint(10, 25)
+        # clock system being started
         self.clock = TimeKeeper()
+        # saving player class for later
+        self.player = player
         # back rooms
         self.weapons_storage = rooms.WeaponsStorage(player)
         self.general_storage = rooms.GeneralStorage(player)
@@ -537,8 +539,8 @@ class RoomSystem:
         self.gen_shop_keeper = npc.GeneralStoreOwner(self.clock, player)
         self.katie = npc.Katie(self.clock, player)
         self.johnson = npc.Johnson(self.clock, player)
-        self.collector = npc.CollectorFelilian(self.clock, self.player)
-        self.inn_keeper = npc.InnKeeper(self.clock, self.player)
+        self.collector = npc.CollectorFelilian(self.clock, player)
+        self.inn_keeper = npc.InnKeeper(self.clock, player)
 
         # list NPCs to check if should be moved
         self.npc_roster = {
@@ -611,8 +613,6 @@ class RoomSystem:
 
     def time_wait_events(self):
         # checks if it is your first time
-
-
         # will allow time to pass when you sleep or preform some actions
         if self.player.sleep:
             if self.clock.timer == 700:
@@ -664,6 +664,7 @@ class RoomSystem:
         for name in self.npc_roster:
             person = self.npc_roster.get(name)
             current_local = person.position
+            # if NPC is to move and they are not disabled
             if person.check_move() and person.alive:
                 if current_local == person.position:
                     # NPC should never move to the same room twice
@@ -700,12 +701,10 @@ class RoomSystem:
 
         # actually removes them from the game
         for name in npc_deletion:
-            try:
+            if name in self.npc_roster:
                 del self.npc_roster[name]
-            except KeyError:
-                pass
 
-        # counts clock up by a quarter hour
+        # counts clock up by a quarter hour every player move
         self.clock.timer += 25
 
     def first_entered_events(self):
