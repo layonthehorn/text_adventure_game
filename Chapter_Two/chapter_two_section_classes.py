@@ -477,6 +477,9 @@ class RoomSystem:
     """This starts all the rooms.
     It also will track NPC movements and cross room changes."""
 
+    bold = colorama.Style.BRIGHT
+    end = colorama.Style.NORMAL
+
     def __init__(self, player):
         # room update trackers
         self.room_booleans = {"room rented": False,
@@ -633,7 +636,7 @@ class RoomSystem:
             if self.random_counter <= 0:
                 random_event = self.random_events.grab_event(self.player.location)
                 if random_event:
-                    print(random_event)
+                    print(self.bold + random_event + self.end)
                     self.random_counter = random.randint(1, 25)
 
             else:
@@ -655,8 +658,8 @@ class RoomSystem:
 
     # moves NPCs around or removes them from the world
     def npc_movement_checker(self):
-        # sleeping event checker
-        self.time_wait_events()
+
+        # self.time_wait_events()
         # cross room changes checker
         self.cross_room_changes()
         npc_deletion = []

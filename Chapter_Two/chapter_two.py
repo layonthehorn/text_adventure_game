@@ -130,6 +130,8 @@ command to clear the screen."""
                     loc_name.print_description_room()
                     self.player.changed_location = False
 
+                # sleeping event checker
+                self.rooms.time_wait_events()
                 print("_" * len(self.commands))
                 print(f"{self.bold + self.commands + self.end}")
                 # checks for special events
