@@ -73,12 +73,14 @@ class RandomEvent:
             # garage upstairs random events
             "break room": ["A musty smell hits your nose, making you feel a little nauseous."],
             "managers office": [],
-            "balcony": [],
+            "balcony": ["A bird flys off into the distance."],
 
             # back rooms random events
             "weapons storage": ["The glint of sun light off chrome plated weapons momentarily blinds you."],
             "work room": [],
-            "freezer": [],
+            "freezer": ["You find yourself salivating at the smell of smoked fish.",
+                        "The scent of smoked ham has you feeling hungry.",
+                        "Your nose is overwhelmed by the scent of smoked cheese."],
             "general storage": ["The cobwebs blow slightly in the dusty breeze."],
 
             # tower rooms random events
@@ -87,10 +89,13 @@ class RandomEvent:
                            "The organ's pipes seem to stretch for miles downward. Such an impressive instrument."],
 
             # mansion rooms and actions
-            "foyer": [],
-            "sun room": [],
-            "hallway": [],
-            "kitchen": [],
+            "foyer": ["A butler greets you politely as you walk in.",
+                      "A maid gives the furniture in the room a clean with a duster."],
+            "sun room": ["The warmth from the sunlight makes you feel cozy.",
+                         "Your eyes adjust to the sudden change in brightness as you walk in."],
+            "hallway": ["A cleaner walks by with a mop and bucket.",
+                        "A nanny smiles at you as she passes by with two young children in tow."],
+            "kitchen": ["The smells coming from within the kitchen have you looking forward to a nice meal."],
             "living room": [],
 
             # garden rooms random events
