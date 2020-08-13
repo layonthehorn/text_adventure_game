@@ -275,7 +275,10 @@ class TownCenter(FunctionClass):
         self.use_dict = {}
 
     def print_description_room(self):
-        print("The starting room.")
+        print("You arrive in the town center. It is a small yet bustling town full of people going about their day."
+              "\nThe streets are lined with shops and stalls selling various goods, from basic food items"
+              "\nto useful supplies for a traveller like yourself. A fountain sits in the middle of the center,"
+              "\nits water glimmers in the daylight.")
         print("__________________")
         self.print_look()
         self.print_locations()
@@ -317,7 +320,11 @@ class TownBar(FunctionClass):
         self.use_dict = {}
 
     def print_description_room(self):
-        print("The town center bar.")
+        print("You walk into the town bar. It is a small yet cozy feeling bar. The walls are lined with"
+              "\nmemorabilia from the old world, as well as signs with names you don't recognize."
+              "\nThere are several patrons sitting at the bar, some of whom would appear to have spent the"
+              "\nwhole day drinking. A band is playing some soft folk music in the corner, and the smell of"
+              "\nbeer and tobacco fills the air.")
         print("__________________")
         self.print_look()
         self.print_locations()
@@ -341,7 +348,9 @@ class TownGenStore(FunctionClass):
         self.use_dict = {}
 
     def print_description_room(self):
-        print("The town center general store.")
+        print("You walk into the town's general store. The shop is full of shelves stocked with various items ranging"
+              "\nfrom weapons and ammunition, to medical supplies and food items. A lioness sits at the counter,"
+              "\nyou find her to be rather cute.")
         print("__________________")
         self.print_look()
         self.print_locations()
@@ -519,7 +528,13 @@ class RuinedGarage(FunctionClass):
         self.use_dict = {}
 
     def print_description_room(self):
-        print("A ruined garage.")
+        print("You walk into the garage.What was once a thriving automotive workshop has become a time capsule"
+              "\nof the past. By the front roller door sits a car riddled with bullet holes, suggesting that"
+              "\nwhoever owned the business did whatever they could to protect their investment. At the back of"
+              "\nthe workshop sits a much more well preserved car, aside from the engine bay being empty"
+              "\nand small rust spots appearing around the windows. The walls are adorned with banners advertising"
+              "\nbrands the shop stocked, as well as some old car parts and tool cabinets. The floor is strewn"
+              "\nwith empty boxes, tools, bottles and parts. The smell of stale fuel lingers in the air.")
         print("__________________")
         self.print_look()
         self.print_locations()
@@ -550,7 +565,9 @@ class UpstairsBreakRoom(FunctionClass):
         self.use_dict = {}
 
     def print_description_room(self):
-        print("An upstairs break room attached to the garage.")
+        print("You walk in to the break room of the garage. There is a table and chairs in the middle of the room."
+              "\nIn one corner is a sink with an old water cooler next to it. In the other corner sits a refrigerator"
+              "\nwith a bench next to it, with an old microwave and some crockery and cutlery.")
         print("__________________")
         self.print_look()
         self.print_locations()
@@ -611,7 +628,10 @@ class UpstairsOffice(FunctionClass):
         self.use_dict = {}
 
     def print_description_room(self):
-        print("An upstairs managers office attached to the garage.")
+        print("You walk into the manager's office of the garage. It would appear the place had been ransacked by the"
+              "\nscavengers you scared off. Various documents are strewn across the floor, mostly sales records"
+              "\nand maintenance records for the courtesy cars the shop once owned. A broken computer sits on the"
+              "\ndesk along with an ashtray and a diary. In the corner sits a large safe.")
         print("__________________")
         self.print_look()
         self.print_locations()
@@ -641,7 +661,9 @@ class MansionFoyer(FunctionClass):
         self.use_dict = {}
 
     def print_description_room(self):
-        print("The mansion foyer.")
+        print("You walk into the mansion's foyer. It's apparent that the owner is well off, judging by the immaculate"
+              "\nmarble floor and chandelier hanging from the ceiling. The walls are adorned with paintings of the"
+              "\nowner's family, as well as some vintage paintings from the old world.")
         print("__________________")
         self.print_look()
         self.print_locations()
