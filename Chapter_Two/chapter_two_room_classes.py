@@ -502,7 +502,8 @@ class RuinedOffice(FunctionClass):
         self.use_dict = {}
 
     def print_description_room(self):
-        print("A ruined city offce.")
+        print("You walk into the ruined office. The building has collapsed somewhat, having turned into something of"
+              "\na manmade cave. The atmosphere of the room makes you nervous about it's structural integrity.")
         print("__________________")
         self.print_look()
         self.print_locations()
@@ -599,7 +600,8 @@ class UpstairsBalcony(FunctionClass):
         self.use_dict = {}
 
     def print_description_room(self):
-        print("An upstairs balcony overlooking the ruined street.")
+        print("You walk on to the garage's balcony. You find yourself overlooking the ruined street. There is a table"
+              "\nand chairs with a small ashtray in the middle of the table. In the corner is a now dead pot plant.")
         print("__________________")
         self.print_look()
         self.print_locations()
@@ -957,7 +959,9 @@ class WeaponsStorage(FunctionClass):
         self.use_dict = {}
 
     def print_description_room(self):
-        print("The General Store's weapons storage.")
+        print("You walk into the general store's weapon storage room. All around you are various types of firearms,"
+              "\nneatly stored on racks that cover both walls. On the floor are various ammo boxes, some of which"
+              "\nyou recognize from your days in the military.")
         print("__________________")
         self.print_look()
         self.print_locations()
@@ -1008,7 +1012,10 @@ class Freezer(FunctionClass):
         self.use_dict = {}
 
     def print_description_room(self):
-        print("The General Store's walk in freezer.")
+        print("You walk into the general store's freezer. Once used to keep perishable items cold, it has been"
+              "\nconverted into a smoking room. On the ceiling hangs some hooks, holding meats such as ham, pork"
+              "\nand several types of smoked fish. On one of the walls is a group of shelves where various types of"
+              "\njerky and peppers are drying out, and on another wall is shelves stocked with smoked cheeses.")
         print("__________________")
         self.print_look()
         self.print_locations()
