@@ -3,21 +3,23 @@ from Chapter_Two.exception_class import ReadOnlyError, ChangeNPCLocationError
 import os
 import platform
 import colorama
+
 colorama.init()
 
 
 # allows me to clear the screen when playing
 def clear():
     operating = platform.system()
-    if operating == 'Linux' or operating == "Darwin":
+    if operating == "Linux" or operating == "Darwin":
         os.system("clear")
-    elif operating == 'Windows':
-        os.system('cls')
+    elif operating == "Windows":
+        os.system("cls")
 
 
 # a shop class for inheritance
 class ShopFunctions:
     """A class for giving shops the needed functions."""
+
     # class variables for print formatting
     bold = colorama.Style.BRIGHT
     end = colorama.Style.NORMAL
@@ -60,7 +62,9 @@ class ShopFunctions:
                     clear()
                     # if you do not have the thing you are trying to sell
                     if choice not in self.player.inventory and choice != "q":
-                        print(f"You don't have a(n) {self.bold + choice + self.end} to sell")
+                        print(
+                            f"You don't have a(n) {self.bold + choice + self.end} to sell"
+                        )
                     # if the item has a value in game
                     elif choice in self.player.sell_item_values:
                         print("I'll take that. Thank you!")
@@ -69,7 +73,9 @@ class ShopFunctions:
                     elif choice == "q":
                         talking = False
                     else:
-                        print(f"I don't want to buy a(n) {self.bold + choice + self.end}")
+                        print(
+                            f"I don't want to buy a(n) {self.bold + choice + self.end}"
+                        )
                 else:
                     print("You don't have anything I want to buy.")
                     talking = False
@@ -93,15 +99,21 @@ class ShopFunctions:
                 # if they have it to sell you
                 if choice in self.shop_inventory:
                     # if you have enough money
-                    if self.player.player_wallet >= self.player.buy_item_values.get(choice):
+                    if self.player.player_wallet >= self.player.buy_item_values.get(
+                        choice
+                    ):
                         self.buy(choice)
                     else:
                         # if you are too poor
-                        print(f"You can't afford the {self.bold + choice + self.end}. You need {self.player.buy_item_values.get(choice) - self.player.player_wallet}.")
+                        print(
+                            f"You can't afford the {self.bold + choice + self.end}. You need {self.player.buy_item_values.get(choice) - self.player.player_wallet}."
+                        )
                 elif choice == "q":
                     talking = False
                 else:
-                    print(f"I don't have a(n) {self.bold + choice + self.end} to sell you.")
+                    print(
+                        f"I don't have a(n) {self.bold + choice + self.end} to sell you."
+                    )
             else:
                 print("I am totally out of things to sell you.")
                 talking = False
@@ -152,7 +164,9 @@ class NPC(ABC):
         pass
 
     def __str__(self):
-        return f"My name is {self.name}, I'm in {self.position}, and it is {self.clock}."
+        return (
+            f"My name is {self.name}, I'm in {self.position}, and it is {self.clock}."
+        )
 
     @property
     @abstractmethod
@@ -177,6 +191,7 @@ class NPC(ABC):
 
 class ScavengerNPC(NPC):
     """A scavenger that moves from the ruins to the general store and back."""
+
     def __init__(self, timer, player):
         self.player = player
         self.clock = timer
@@ -244,6 +259,7 @@ class ScavengerNPC(NPC):
 
 class OrganPlayer(NPC):
     """An organ player that starts in the mansion and you can give items."""
+
     def __init__(self, timer, player):
         self.clock = timer
         self.player = player
@@ -294,10 +310,14 @@ class OrganPlayer(NPC):
     def talk_to_npc(self):
         if self.position == "tower peak":
             print("Hello I am playing music up here. Perfect for a puzzle, huh?")
-            print(f"My name is {self.name}, I'm in {self.position}, and it is {self.clock.timer}, {self.clock.am_pm}")
+            print(
+                f"My name is {self.name}, I'm in {self.position}, and it is {self.clock.timer}, {self.clock.am_pm}"
+            )
         else:
             print("Think of them moving to this new location after I get what I want.")
-            print(f"My name is {self.name}, I'm in {self.position}, and it is {self.clock.timer}, {self.clock.am_pm}")
+            print(
+                f"My name is {self.name}, I'm in {self.position}, and it is {self.clock.timer}, {self.clock.am_pm}"
+            )
 
     def look_npc(self):
         if self.position == "tower peak":
@@ -308,6 +328,7 @@ class OrganPlayer(NPC):
 
 class GeneralStoreOwner(NPC, ShopFunctions):
     """An organ player that starts in the mansion and you can give items."""
+
     def __init__(self, timer, player):
         self.clock = timer
         self.player = player
@@ -317,7 +338,10 @@ class GeneralStoreOwner(NPC, ShopFunctions):
         self.shop_inventory = []
 
     def look_npc(self):
-        print("She's a friendly lioness shop keeper. Very attractive if I say so myself.", end=" ")
+        print(
+            "She's a friendly lioness shop keeper. Very attractive if I say so myself.",
+            end=" ",
+        )
         if self.shop_inventory:
             print("Looks like there are thing to buy if I wanted.")
         else:
@@ -361,6 +385,7 @@ class GeneralStoreOwner(NPC, ShopFunctions):
 
 class Johnson(NPC):
     """The NPC that gives your first mission and the one to end the game."""
+
     def __init__(self, timer, player):
         self.player = player
         self.clock = timer
@@ -415,7 +440,9 @@ class Johnson(NPC):
         if self.home_room == "inn room":
             print("Good job on the room. Much better than a child out on the streets.")
         if self.player.player_wallet < 15000:
-            print("Hello Vern. You should keep collecting money. Don't lose it this time OK?")
+            print(
+                "Hello Vern. You should keep collecting money. Don't lose it this time OK?"
+            )
         else:
             # winning game condition
             print("Hey, you actually got the amount we need to get out of here, nice.")
@@ -429,6 +456,7 @@ class Johnson(NPC):
 
 class Katie(NPC):
     """The main character's daughter."""
+
     def __init__(self, timer, player):
         self.player = player
         self.clock = timer
@@ -505,14 +533,19 @@ class Katie(NPC):
                 print("You share a large hug and feel much better.")
 
     def look_npc(self):
-        print("It's my wonderful daughter Katie. She's wearing that lion tail I found in the mall."
-              "\nI adore her in every way. I can't wait to see how she grows up.")
+        print(
+            "It's my wonderful daughter Katie. She's wearing that lion tail I found in the mall."
+            "\nI adore her in every way. I can't wait to see how she grows up."
+        )
         if self.home_room == "town center":
-            print("I need a safe place for her. I can't have her spend the night outside.")
+            print(
+                "I need a safe place for her. I can't have her spend the night outside."
+            )
 
 
 class CollectorFelilian(NPC):
     """A collector of oddities that resides in the inn entrance."""
+
     def __init__(self, timer, player):
         self.player = player
         self.clock = timer
@@ -551,16 +584,20 @@ class CollectorFelilian(NPC):
                 # check if should leave game
                 self.leave_game()
             elif item == "movie poster":
-                print("Wow, look at that! A real Felilian, he even looks a bit like you."
-                      "\nThis will shake things up a bit for sure!")
+                print(
+                    "Wow, look at that! A real Felilian, he even looks a bit like you."
+                    "\nThis will shake things up a bit for sure!"
+                )
                 self.inventory.append(item)
                 self.player.score += 1
                 self.player.inventory.remove(item)
                 # check if should leave game
                 self.leave_game()
             else:
-                print("No that's not what I am looking for. I need things that prove we were always here."
-                      "\nDisprove those lunnies that say we showed up out of nowhere.")
+                print(
+                    "No that's not what I am looking for. I need things that prove we were always here."
+                    "\nDisprove those lunnies that say we showed up out of nowhere."
+                )
         else:
             print("Hey, are you a scavenger? If so let's talk.")
 
@@ -571,15 +608,18 @@ class CollectorFelilian(NPC):
             clear()
             if choice == "y":
                 print("Oh wonderful!")
-                print("I need to try and collect a few oddities from human history."
-                      "\n")
+                print(
+                    "I need to try and collect a few oddities from human history." "\n"
+                )
                 self.quest_taken = True
             else:
                 print("Oh, well if you change your mind, I'll be right here.")
         elif "movie poster" in self.inventory:
             print("That movie poster is great! Can you keep an eye out for more?")
         elif "vhs tape" in self.inventory:
-            print("I just need a few more things. The tape is exciting and I hope it plays still.")
+            print(
+                "I just need a few more things. The tape is exciting and I hope it plays still."
+            )
         else:
             print("You still looking for those items? Try the ruins outside of town.")
 
@@ -592,15 +632,18 @@ class CollectorFelilian(NPC):
     def leave_game(self):
         if len(self.inventory) == 2:
             print("That's all I needed! Thanks my friendly lion.")
-            print("The jaguar quickly runs off with the items you collected but not before"
-                  "\npaying you handsomely for your efforts."
-                  "\nI wonder if I'll ever see him again, odd fellow.")
+            print(
+                "The jaguar quickly runs off with the items you collected but not before"
+                "\npaying you handsomely for your efforts."
+                "\nI wonder if I'll ever see him again, odd fellow."
+            )
             self.player.change_player_wallet(50)
             self.alive = False
 
 
 class InnKeeper(NPC):
     """The inn keeper that rents the rooms out."""
+
     def __init__(self, timer, player):
         self.player = player
         self.clock = timer
@@ -631,16 +674,22 @@ class InnKeeper(NPC):
 
     def talk_to_npc(self):
         if not self.room_rented:
-            print("Would you like to rent a room? It's only 5 coins for your whole stay.")
+            print(
+                "Would you like to rent a room? It's only 5 coins for your whole stay."
+            )
             choice = input("y/n ").lower()
             if choice == "y":
                 if self.player.player_wallet >= 5:
-                    print("Ok, the room's all yours. Please don't get fur on everything?")
+                    print(
+                        "Ok, the room's all yours. Please don't get fur on everything?"
+                    )
                     self.player.change_player_wallet(-5)
                     self.room_rented = True
                     print("Katie and Johnson move to the inn's room you rented.")
                 else:
-                    print(f"Sorry, you'll need more money. about {5 - self.player.player_wallet} more in fact.")
+                    print(
+                        f"Sorry, you'll need more money. about {5 - self.player.player_wallet} more in fact."
+                    )
             else:
                 print("Well if you change your mind, it's still open.")
         else:

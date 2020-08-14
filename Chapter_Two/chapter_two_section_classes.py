@@ -3,8 +3,15 @@ import pprint
 import random
 import Chapter_Two.chapter_two_room_classes as rooms
 import Chapter_Two.chapter_two_npc_classes as npc
-from Chapter_Two.exception_class import LocationError, NPCLocationError, ChangeSectionError, RedundantMoveError, MapMatchError
+from Chapter_Two.exception_class import (
+    LocationError,
+    NPCLocationError,
+    ChangeSectionError,
+    RedundantMoveError,
+    MapMatchError,
+)
 import colorama
+
 colorama.init()
 
 
@@ -17,42 +24,92 @@ class PlayerClass:
     end = colorama.Style.NORMAL
 
     # dictionaries used for formatting the maps
-    map_dict = {"inn": {"IE": "inn entrance", "IR": "inn room"},
-                "town": {"TC": "town center", "TB": "bar", "GS": "general store", "BH": "bath house", "GH": "gate house"},
-                "ruins": {"RH": "ruined house", "RG": "ruined garage", "RO": "ruined office", "RS": "ruined street"},
-                "tower": {"TP": "tower peak", "TE": "tower entrance"},
-                "mansion": {"MF": "foyer", "MK": "kitchen", "HW": "hallway", "SR": "sun room", "LR": "living room"},
-                "gardens": {},
-                "cellar": {"LB": "lab", "WC": "wine casks", "CE": "cellar entrance"},
-                "gen back rooms": {"WR": "work room", "FR": "freezer", "WS": "weapon storage", "GS": "general storage"},
-                "upstairs": {"BR": "break room", "MO": "manager office", "GB": "balcony", },
-                }
+    map_dict = {
+        "inn": {"IE": "inn entrance", "IR": "inn room"},
+        "town": {
+            "TC": "town center",
+            "TB": "bar",
+            "GS": "general store",
+            "BH": "bath house",
+            "GH": "gate house",
+        },
+        "ruins": {
+            "RH": "ruined house",
+            "RG": "ruined garage",
+            "RO": "ruined office",
+            "RS": "ruined street",
+        },
+        "tower": {"TP": "tower peak", "TE": "tower entrance"},
+        "mansion": {
+            "MF": "foyer",
+            "MK": "kitchen",
+            "HW": "hallway",
+            "SR": "sun room",
+            "LR": "living room",
+        },
+        "gardens": {},
+        "cellar": {"LB": "lab", "WC": "wine casks", "CE": "cellar entrance"},
+        "gen back rooms": {
+            "WR": "work room",
+            "FR": "freezer",
+            "WS": "weapon storage",
+            "GS": "general storage",
+        },
+        "upstairs": {"BR": "break room", "MO": "manager office", "GB": "balcony",},
+    }
 
     # accepted locations where you can go
     accepted_locations = (
-        "end", "exit",
-        "town center", "general store", "gate house", "bath house", "bar",
-        "ruined street", "ruined office", "ruined house", "ruined garage",
-        "kitchen", "foyer", "sun room", "living room", "hallway",
-        "tower entrance", "tower peak",
-        "cellar entrance", "wine casks", "lab",
-        "manager office", "break room", "balcony",
-        "weapon storage", "work room", "general storage", "freezer",
-        "inn entrance", "inn room"
-                          )
+        "end",
+        "exit",
+        "town center",
+        "general store",
+        "gate house",
+        "bath house",
+        "bar",
+        "ruined street",
+        "ruined office",
+        "ruined house",
+        "ruined garage",
+        "kitchen",
+        "foyer",
+        "sun room",
+        "living room",
+        "hallway",
+        "tower entrance",
+        "tower peak",
+        "cellar entrance",
+        "wine casks",
+        "lab",
+        "manager office",
+        "break room",
+        "balcony",
+        "weapon storage",
+        "work room",
+        "general storage",
+        "freezer",
+        "inn entrance",
+        "inn room",
+    )
     # sections of the map, changes how your map looks.
-    accepted_sections = {"town": ("town center", "general store", "gate house", "bath house", "bar")
-                         , "ruins": ("ruined street", "ruined office", "ruined house", "ruined garage")
-                         , "mansion": ("kitchen", "foyer", "sun room", "living room", "hallway")
-                         , "upstairs": ("manager office", "break room", "balcony")
-                         , "gen back rooms": ("weapon storage", "work room", "general storage", "freezer")
-                         , "tower": ("tower entrance", "tower peak")
-                         , "cellar": ("cellar entrance", "wine casks", "lab")
-                         , "gardens": ()
-                         , "inn": ("inn entrance", "inn room")
-                         }
-    use_remarks = ("I was useful after all.", "I feel used...", "I never knew I could use myself.",
-                   "At least I didn't ruffle my mane.", "I think I'm still in one piece after that.")
+    accepted_sections = {
+        "town": ("town center", "general store", "gate house", "bath house", "bar"),
+        "ruins": ("ruined street", "ruined office", "ruined house", "ruined garage"),
+        "mansion": ("kitchen", "foyer", "sun room", "living room", "hallway"),
+        "upstairs": ("manager office", "break room", "balcony"),
+        "gen back rooms": ("weapon storage", "work room", "general storage", "freezer"),
+        "tower": ("tower entrance", "tower peak"),
+        "cellar": ("cellar entrance", "wine casks", "lab"),
+        "gardens": (),
+        "inn": ("inn entrance", "inn room"),
+    }
+    use_remarks = (
+        "I was useful after all.",
+        "I feel used...",
+        "I never knew I could use myself.",
+        "At least I didn't ruffle my mane.",
+        "I think I'm still in one piece after that.",
+    )
 
     def __init__(self, debug):
 
@@ -62,12 +119,9 @@ class PlayerClass:
         self.bathed = False
         self.name = "Vern MacCaster"
         # neg
-        self.buy_item_values = {"fish": -5,
-                                "can": -3}
+        self.buy_item_values = {"fish": -5, "can": -3}
         # pos
-        self.sell_item_values = {"fish": 4,
-                                 "can": 2,
-                                 "rock": 1}
+        self.sell_item_values = {"fish": 4, "can": 2, "rock": 1}
         self.__location = "town center"
         self.__section = "town"
         self.changed_location = True
@@ -75,10 +129,12 @@ class PlayerClass:
         self.player_wallet = 0
         self.places = []
 
-        self.item_dictionary = {"music sheet": "A piece of sheet music. Maybe someone would want this?",
-                                "fish": "A tasty fish for testing only.",
-                                "vhs tape": "An old VHS tape that a collector might want somewhere.",
-                                "movie poster": "An old movie poster. It shows an action hero fighting a monster cat man."}
+        self.item_dictionary = {
+            "music sheet": "A piece of sheet music. Maybe someone would want this?",
+            "fish": "A tasty fish for testing only.",
+            "vhs tape": "An old VHS tape that a collector might want somewhere.",
+            "movie poster": "An old movie poster. It shows an action hero fighting a monster cat man.",
+        }
 
     def __str__(self):
         return f"""Inventory {self.inventory}\nLocation {self.__location}\nSection {self.section}\nScore {self.__score}"""
@@ -138,7 +194,9 @@ class PlayerClass:
         # makes sure that you do not enter a bad location.
         if location not in self.accepted_locations:
             if self.debug:
-                print(f"Could not fine {location}... Possible missing spelling in code?")
+                print(
+                    f"Could not fine {location}... Possible missing spelling in code?"
+                )
                 print("Could not find matching location. Canceling movement.")
             else:
                 raise LocationError(location)
@@ -211,7 +269,8 @@ class PlayerClass:
                 # should not be shown to player as being an item.
                 if item != "self":
                     print(
-                        f"{self.bold + item + self.end:<25}{self.item_dictionary.get(item, 'Error, Report me pls!'):<5}")
+                        f"{self.bold + item + self.end:<25}{self.item_dictionary.get(item, 'Error, Report me pls!'):<5}"
+                    )
 
     # removes items from player
     # can use any number of items.
@@ -259,7 +318,8 @@ class PlayerClass:
             raise LocationError(self.location)
         time.sleep(1.5)
         if self.section == "town":
-            print(f"""
+            print(
+                f"""
                                                    +--------------------+
                                                    |     Town Area      |
                                                    +--------------------+     
@@ -276,9 +336,11 @@ class PlayerClass:
                                                    |Inn Area:        IA |
                                                    |You: @@ in room  {player_room} |
                                                    +--------------------+ 
-              """)
+              """
+            )
         elif self.section == "ruins":
-            print(f"""
+            print(
+                f"""
                                                    +--------------------+
                                                    |     Ruins Area     |
                                                    +--------------------+
@@ -292,9 +354,11 @@ class PlayerClass:
                                                    |Ruined Street:   RS |
                                                    |You: @@ in room  {player_room} |
                                                    +--------------------+
-              """)
+              """
+            )
         elif self.section == "tower":
-            print(f"""
+            print(
+                f"""
                                                    +--------------------+
                                                    |     Tower Area     |
                                                    +--------------------+
@@ -305,9 +369,11 @@ class PlayerClass:
                       MA                           |Tower Entrance:  TE |
                                                    |You: @@ in room  {player_room} |
                                                    +--------------------+
-              """)
+              """
+            )
         elif self.section == "mansion":
-            print(f"""
+            print(
+                f"""
                                                    +--------------------+
                                                    |    Mansion Area    |
                                                    +--------------------+
@@ -323,9 +389,11 @@ class PlayerClass:
                       CA                           |Living Room:     LR |
                                                    |You: @@ in room  {player_room} |
                                                    +--------------------+
-              """)
+              """
+            )
         elif self.section == "gardens":
-            print("""
+            print(
+                """
                                                    +--------------------+
                                                    |    Garden Area     |
                                                    +--------------------+
@@ -341,9 +409,11 @@ class PlayerClass:
                                                    |Room Seven:      R7 |
                                                    |You: @@ in room  ?? |
                                                    +--------------------+
-              """)
+              """
+            )
         elif self.section == "cellar":
-            print(f"""
+            print(
+                f"""
                                                    +--------------------+
                                                    |    Cellar Area     |
                                                    +--------------------+
@@ -355,9 +425,11 @@ class PlayerClass:
                       {places[1]}                           |Cellar Entrance: CE |
                                                    |You: @@ in room  {player_room} |
                                                    +--------------------+
-              """)
+              """
+            )
         elif self.section == "gen back rooms":
-            print(f"""
+            print(
+                f"""
                                                    +--------------------+
                                                    |  Back Rooms Area   |
                                                    +--------------------+
@@ -370,9 +442,11 @@ class PlayerClass:
                                                    |Weapons Storage: WS |
                                                    |You: @@ in room  {player_room} |
                                                    +--------------------+
-              """)
+              """
+            )
         elif self.section == "upstairs":
-            print(f"""
+            print(
+                f"""
                                                    +--------------------+
                                                    |   Upstairs Area    |
                                                    +--------------------+
@@ -384,10 +458,12 @@ class PlayerClass:
                                                    |Garage Balcony:  GB |
                                                    |You: @@ in room  {player_room} |
                                                    +--------------------+
-              """)
+              """
+            )
         elif self.section == "inn":
             # dynamic map
-            print(f"""
+            print(
+                f"""
                                                    +--------------------+
                                                    |      Inn Area      |
                                                    +--------------------+
@@ -398,18 +474,27 @@ class PlayerClass:
                                                    |Inn Room:        IR |
                                                    |You: @@ in room  {player_room} |
                                                    +--------------------+
-              """)
+              """
+            )
         else:
             # IF I fail to find a matching map section
             raise MapMatchError(self.section)
 
     # looking at self
     def look_self(self):
-        print("A nervous lion is what you are. Somehow still alive but for how long? Hopefully long enough.")
+        print(
+            "A nervous lion is what you are. Somehow still alive but for how long? Hopefully long enough."
+        )
         if not self.bathed:
-            print(random.choice(["I could really use a good clean up.",
-                                 "I'm covered in filth from traveling. I better find somewhere to clean myself up.",
-                                 "My mane needs a good clean up and brush."]))
+            print(
+                random.choice(
+                    [
+                        "I could really use a good clean up.",
+                        "I'm covered in filth from traveling. I better find somewhere to clean myself up.",
+                        "My mane needs a good clean up and brush.",
+                    ]
+                )
+            )
         else:
             print("I'm looking a lot nicer than when I came here.")
 
@@ -427,7 +512,9 @@ class TimeKeeper:
     @days_past.setter
     def days_past(self, new_value):
         if new_value - self.days_past != 1:
-            raise ValueError(f"Increasing time can only be done with a value of one, {new_value}.")
+            raise ValueError(
+                f"Increasing time can only be done with a value of one, {new_value}."
+            )
         else:
             self.__days_past = new_value
             print("A new day is here.")
@@ -449,7 +536,7 @@ class TimeKeeper:
 
     @timer.setter
     def timer(self, add_time):
-        if (self.__timer + add_time)/2 > 2400:
+        if (self.__timer + add_time) / 2 > 2400:
             add_time = (self.__timer + add_time) % 2400
             self.days_past += 1
             self.am_pm = "AM"
@@ -465,9 +552,9 @@ class TimeKeeper:
 
         # making sure it is always the right length for my string methods
         clock_time = clock_time.zfill(4)
-        clock_time = clock_time[0:2] + ':' + clock_time[2:]
+        clock_time = clock_time[0:2] + ":" + clock_time[2:]
         # finds the human readable time
-        minutes = str(int(int(clock_time[3:5]) * 3/5))
+        minutes = str(int(int(clock_time[3:5]) * 3 / 5))
         clock_time = clock_time[0:3] + minutes.zfill(2)
 
         return f"The time is {clock_time}, {self.am_pm} and {self.days_past} days have past."
@@ -482,16 +569,17 @@ class RoomSystem:
 
     def __init__(self, player):
         # room update trackers
-        self.room_booleans = {"room rented": False,
-                              "player bathed": False,
-                              "office opened": False
-                              }
+        self.room_booleans = {
+            "room rented": False,
+            "player bathed": False,
+            "office opened": False,
+        }
         self.entry_events_dict = {
             # first entry events
             "gen work room": False,
             "bath house first": False,
-            "garage entry": False
-                            }
+            "garage entry": False,
+        }
         # random event seed
         self.random_counter = random.randint(10, 25)
         # clock system being started
@@ -560,8 +648,8 @@ class RoomSystem:
             # collector NPC
             self.collector.name: self.collector,
             # the inn keeper
-            self.inn_keeper.name: self.inn_keeper
-            }
+            self.inn_keeper.name: self.inn_keeper,
+        }
 
         # lists possible rooms to move to
         self.switcher_dictionary = {
@@ -571,46 +659,38 @@ class RoomSystem:
             "bath house": self.bath_house,
             "general store": self.gen_store,
             "gate house": self.gate_house,
-
             # ruins rooms and actions
             "ruined street": self.street,
             "ruined office": self.ruin_office,
             "ruined house": self.house,
             "ruined garage": self.garage,
-
             # garage upstairs rooms and actions
             "break room": self.break_room,
             "managers office": self.gar_office,
             "balcony": self.balcony,
-
             # back rooms and actions
             "weapons storage": self.weapons_storage,
             "work room": self.work_room,
             "freezer": self.freezer,
             "general storage": self.general_storage,
-
             # tower rooms and actions
             "tower entrance": self.tow_entrance,
             "tower peak": self.peak,
-
             # mansion rooms and actions
             "foyer": self.foyer,
             "sun room": self.sun_room,
             "hallway": self.hallway,
             "kitchen": self.kitchen,
             "living room": self.living_room,
-
             # garden rooms and actions
             # "garden": self.rooms,
-
             # inn rooms and actions
             "inn entrance": self.inn_entrance,
             "inn room": self.inn_room,
-
             # cellar rooms and actions
             "cellar entrance": self.cell_entrance,
             "wine casks": self.wine_casks,
-            "lab": self.lab
+            "lab": self.lab,
         }
         self.random_events = rooms.RandomEvent(self.switcher_dictionary)
 
@@ -625,7 +705,10 @@ class RoomSystem:
                 self.player.sleep = False
 
         # moves player out of the general store
-        if (2000 <= self.clock.timer <= 2500 or 0 <= self.clock.timer <= 800) and (self.player.location == "general store" or self.player.section == "gen back rooms"):
+        if (2000 <= self.clock.timer <= 2500 or 0 <= self.clock.timer <= 800) and (
+            self.player.location == "general store"
+            or self.player.section == "gen back rooms"
+        ):
 
             print("Looks like the store is closing. I'll have to leave for the night.")
             time.sleep(1)
@@ -713,21 +796,36 @@ class RoomSystem:
     def first_entered_events(self):
         # if all are triggered it stops running all the checks
         if not all(self.entry_events_dict.values()):
-            if self.player.location == "work room" and not self.entry_events_dict["gen work room"]:
-                print("As you enter the room an odd looking animal grabs the tool bag and leaps out a window."
-                      "\nDamn it. Now how am I going to get that machine fixed? I need to find that creature.")
+            if (
+                self.player.location == "work room"
+                and not self.entry_events_dict["gen work room"]
+            ):
+                print(
+                    "As you enter the room an odd looking animal grabs the tool bag and leaps out a window."
+                    "\nDamn it. Now how am I going to get that machine fixed? I need to find that creature."
+                )
                 time.sleep(1)
                 self.entry_events_dict["gen work room"] = True
-            elif self.player.location == "bath house" and not self.entry_events_dict["bath house first"]:
-                print("The large pipe feeding the baths suddenly springs a leak. The owner grumbles and looks you over"
-                      "\nIf I didn't know any better I'd think you were a black cat, he mutters."
-                      "\nI'll need to fix that before I can get cleaned up from the road.")
+            elif (
+                self.player.location == "bath house"
+                and not self.entry_events_dict["bath house first"]
+            ):
+                print(
+                    "The large pipe feeding the baths suddenly springs a leak. The owner grumbles and looks you over"
+                    "\nIf I didn't know any better I'd think you were a black cat, he mutters."
+                    "\nI'll need to fix that before I can get cleaned up from the road."
+                )
                 self.entry_events_dict["bath house first"] = True
                 time.sleep(1)
-            elif self.player.location == "ruined garage" and not self.entry_events_dict["garage entry"]:
-                print("As you open the door to the inside and walk in, you accidentally knock over a large tool chest."
-                      "\nYou're tail frizzes up and you jump back. When you're eyes fall upon the tool chest, you feel"
-                      "rather silly.")
+            elif (
+                self.player.location == "ruined garage"
+                and not self.entry_events_dict["garage entry"]
+            ):
+                print(
+                    "As you open the door to the inside and walk in, you accidentally knock over a large tool chest."
+                    "\nYou're tail frizzes up and you jump back. When you're eyes fall upon the tool chest, you feel"
+                    "rather silly."
+                )
                 self.entry_events_dict["garage entry"] = True
                 time.sleep(1)
 

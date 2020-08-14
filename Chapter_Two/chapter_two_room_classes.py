@@ -4,16 +4,17 @@ import platform
 import time
 from Chapter_Two.exception_class import LocationError
 import colorama
+
 colorama.init()
 
 
 # allows me to clear the screen when playing
 def clear():
     operating = platform.system()
-    if operating == 'Linux' or operating == "Darwin":
+    if operating == "Linux" or operating == "Darwin":
         os.system("clear")
-    elif operating == 'Windows':
-        os.system('cls')
+    elif operating == "Windows":
+        os.system("cls")
 
 
 # a fun little thing for sleeping. does nothing useful.
@@ -25,7 +26,7 @@ def simulation_faker():
         print(f"Simulating world: [{progress:<10}] {percent}%")
         progress += "-"
         percent += 10
-        time.sleep(.5)
+        time.sleep(0.5)
         clear()
     print("Finished Simulation")
     time.sleep(1)
@@ -34,83 +35,110 @@ def simulation_faker():
 # a class for picking random events
 class RandomEvent:
     """A class to return random events."""
+
     def __init__(self, local_dict):
         self.local_dict = local_dict
         self.random_event_dict = {
             # town center random events
-            "town center": ["A wagon races through the town.",
-                            "A young man trips and falls while distracted by a passing lady.",
-                            "A dog bark sets your fur on edge."],
-
+            "town center": [
+                "A wagon races through the town.",
+                "A young man trips and falls while distracted by a passing lady.",
+                "A dog bark sets your fur on edge.",
+            ],
             # town bar random events
-            "bar": ["A glass is dropped and broken by an drunk patron.",
-                    "the bar tender wipes down the counter after a patron leaves."],
-
+            "bar": [
+                "A glass is dropped and broken by an drunk patron.",
+                "the bar tender wipes down the counter after a patron leaves.",
+            ],
             # bath house random events
-            "bath house": ["The pipe let out an odd groaning noise around you.",
-                           "The faint sound of water dripping echoes from the building."],
-
+            "bath house": [
+                "The pipe let out an odd groaning noise around you.",
+                "The faint sound of water dripping echoes from the building.",
+            ],
             # general store random events
-            "general store": ["A young child tries to pick up some sweets, but her mother makes her put them back.",
-                              "A echo of moving material rumbles from the back rooms.",
-                              "The faint smell of smoked meat reminds you that you're hungry."],
-
+            "general store": [
+                "A young child tries to pick up some sweets, but her mother makes her put them back.",
+                "A echo of moving material rumbles from the back rooms.",
+                "The faint smell of smoked meat reminds you that you're hungry.",
+            ],
             #
-            "gate house": ["A guard taps his foot waiting for you say what you want.",
-                           "You see young children playing on the mansion front lawn.",
-                           "The large mansion gates creak eerily in the wind."],
-
+            "gate house": [
+                "A guard taps his foot waiting for you say what you want.",
+                "You see young children playing on the mansion front lawn.",
+                "The large mansion gates creak eerily in the wind.",
+            ],
             # ruins random events
-            "ruined street": ["You spot a small rodent running across the street into some nearby bushes.",
-                              "A dog looks at you nervously before running off down the street."],
-            "ruined office": ["The room creaks loudly, making you nervous.",
-                              "You hear the faint sound of water dripping somewhere in the room."],
-            "ruined house": ["A large spider scuttles quickly across one of the walls,"
-                             "\ntaking refuge behind one of the curtains."],
-            "ruined garage": ["The scent of old oil and fuel hits your nose.",
-                              "You hear the sounds of something running around in the ceiling."],
-
+            "ruined street": [
+                "You spot a small rodent running across the street into some nearby bushes.",
+                "A dog looks at you nervously before running off down the street.",
+            ],
+            "ruined office": [
+                "The room creaks loudly, making you nervous.",
+                "You hear the faint sound of water dripping somewhere in the room.",
+            ],
+            "ruined house": [
+                "A large spider scuttles quickly across one of the walls,"
+                "\ntaking refuge behind one of the curtains."
+            ],
+            "ruined garage": [
+                "The scent of old oil and fuel hits your nose.",
+                "You hear the sounds of something running around in the ceiling.",
+            ],
             # garage upstairs random events
-            "break room": ["A musty smell hits your nose, making you feel a little nauseous."],
+            "break room": [
+                "A musty smell hits your nose, making you feel a little nauseous."
+            ],
             "managers office": [],
             "balcony": ["A bird flys off into the distance."],
-
             # back rooms random events
-            "weapons storage": ["The glint of sun light off chrome plated weapons momentarily blinds you."],
+            "weapons storage": [
+                "The glint of sun light off chrome plated weapons momentarily blinds you."
+            ],
             "work room": [],
-            "freezer": ["You find yourself salivating at the smell of smoked fish.",
-                        "The scent of smoked ham has you feeling hungry.",
-                        "Your nose is overwhelmed by the scent of smoked cheese."],
+            "freezer": [
+                "You find yourself salivating at the smell of smoked fish.",
+                "The scent of smoked ham has you feeling hungry.",
+                "Your nose is overwhelmed by the scent of smoked cheese.",
+            ],
             "general storage": ["The cobwebs blow slightly in the dusty breeze."],
-
             # tower rooms random events
             "tower entrance": [],
-            "tower peak": ["It strikes you how lovely the surrounding mansion grounds look from up here.",
-                           "The organ's pipes seem to stretch for miles downward. Such an impressive instrument."],
-
+            "tower peak": [
+                "It strikes you how lovely the surrounding mansion grounds look from up here.",
+                "The organ's pipes seem to stretch for miles downward. Such an impressive instrument.",
+            ],
             # mansion rooms and actions
-            "foyer": ["A butler greets you politely as you walk in.",
-                      "A maid gives the furniture in the room a clean with a duster."],
-            "sun room": ["The warmth from the sunlight makes you feel cozy.",
-                         "Your eyes adjust to the sudden change in brightness as you walk in."],
-            "hallway": ["A cleaner walks by with a mop and bucket.",
-                        "A nanny smiles at you as she passes by with two young children in tow."],
-            "kitchen": ["The smells coming from within the kitchen have you looking forward to a nice meal."],
+            "foyer": [
+                "A butler greets you politely as you walk in.",
+                "A maid gives the furniture in the room a clean with a duster.",
+            ],
+            "sun room": [
+                "The warmth from the sunlight makes you feel cozy.",
+                "Your eyes adjust to the sudden change in brightness as you walk in.",
+            ],
+            "hallway": [
+                "A cleaner walks by with a mop and bucket.",
+                "A nanny smiles at you as she passes by with two young children in tow.",
+            ],
+            "kitchen": [
+                "The smells coming from within the kitchen have you looking forward to a nice meal."
+            ],
             "living room": [],
-
             # garden rooms random events
             # "garden entrance": [],
-
             # inn rooms random events
             "inn entrance": [],
-            "inn room": ["The windows shake in the wind. Though you would swear there's no wind to cause it.",
-                         "Whispers seem to echo from the closet but when you try to listen they stop."],
-
+            "inn room": [
+                "The windows shake in the wind. Though you would swear there's no wind to cause it.",
+                "Whispers seem to echo from the closet but when you try to listen they stop.",
+            ],
             # cellar rooms random events
             "cellar entrance": [],
-            "wine casks": ["You notice how some of the casks seem to be newer than the rest.",
-                           "The amount of spider webs down here creep you out."],
-            "lab": ["Beakers and bottles bubble all around you."]
+            "wine casks": [
+                "You notice how some of the casks seem to be newer than the rest.",
+                "The amount of spider webs down here creep you out.",
+            ],
+            "lab": ["Beakers and bottles bubble all around you."],
         }
 
     def grab_event(self, player_location):
@@ -141,7 +169,10 @@ class FunctionClass:
     go_to_remarks = ("I can't go to {0}.", "Where is {0}?")
     use_remarks = ("What is a(n) {0}.", "I can't do anything to the {0}")
     get_remarks = ("There isn't a(n) {0} to get.", "I can't find a(n) {0} to pick up.")
-    drop_remarks = ("I don't have a(n) {0} to drop.", "I would need to have a(n) {0} to drop it.")
+    drop_remarks = (
+        "I don't have a(n) {0} to drop.",
+        "I would need to have a(n) {0} to drop it.",
+    )
 
     # allows getting a print function form the look dictionary.
     def get_look_commands(self, look_at):
@@ -258,6 +289,7 @@ class FunctionClass:
 # town center rooms
 class TownCenter(FunctionClass):
     """Starting room and center of town."""
+
     def __init__(self, player_object, timer):
 
         self.inventory = []
@@ -265,20 +297,24 @@ class TownCenter(FunctionClass):
         self.player = player_object
         self.bool_one, self.bool_two, self.bool_three = (False, False, False)
         self.look_dict = {"room": self.print_description_room}
-        self.go_dict = {"bar": self.go_bar,
-                        "general store": self.go_gen_store,
-                        "gate house": self.go_gate_house,
-                        "bath house": self.go_bath_house,
-                        "ruined street": self.go_ruined_street,
-                        "town inn": self.go_inn_entrance}
+        self.go_dict = {
+            "bar": self.go_bar,
+            "general store": self.go_gen_store,
+            "gate house": self.go_gate_house,
+            "bath house": self.go_bath_house,
+            "ruined street": self.go_ruined_street,
+            "town inn": self.go_inn_entrance,
+        }
         self.oper_dict = {}
         self.use_dict = {}
 
     def print_description_room(self):
-        print("You arrive in the town center. It is a small yet bustling town full of people going about their day."
-              "\nThe streets are lined with shops and stalls selling various goods, from basic food items"
-              "\nto useful supplies for a traveller like yourself. A fountain sits in the middle of the center,"
-              "\nits water glimmers in the daylight.")
+        print(
+            "You arrive in the town center. It is a small yet bustling town full of people going about their day."
+            "\nThe streets are lined with shops and stalls selling various goods, from basic food items"
+            "\nto useful supplies for a traveller like yourself. A fountain sits in the middle of the center,"
+            "\nits water glimmers in the daylight."
+        )
         print("__________________")
         self.print_look()
         self.print_locations()
@@ -308,6 +344,7 @@ class TownCenter(FunctionClass):
 
 class TownBar(FunctionClass):
     """Bar that acts as a shop and a meeting place."""
+
     def __init__(self, player_object):
 
         self.inventory = []
@@ -320,11 +357,13 @@ class TownBar(FunctionClass):
         self.use_dict = {}
 
     def print_description_room(self):
-        print("You walk into the town bar. It is a small yet cozy feeling bar. The walls are lined with"
-              "\nmemorabilia from the old world, as well as signs with names you don't recognize."
-              "\nThere are several patrons sitting at the bar, some of whom would appear to have spent the"
-              "\nwhole day drinking. A band is playing some soft folk music in the corner, and the smell of"
-              "\nbeer and tobacco fills the air.")
+        print(
+            "You walk into the town bar. It is a small yet cozy feeling bar. The walls are lined with"
+            "\nmemorabilia from the old world, as well as signs with names you don't recognize."
+            "\nThere are several patrons sitting at the bar, some of whom would appear to have spent the"
+            "\nwhole day drinking. A band is playing some soft folk music in the corner, and the smell of"
+            "\nbeer and tobacco fills the air."
+        )
         print("__________________")
         self.print_look()
         self.print_locations()
@@ -336,6 +375,7 @@ class TownBar(FunctionClass):
 
 class TownGenStore(FunctionClass):
     """town general store that acts as a shop and a puzzle hub."""
+
     def __init__(self, player_object):
 
         self.inventory = []
@@ -348,9 +388,11 @@ class TownGenStore(FunctionClass):
         self.use_dict = {}
 
     def print_description_room(self):
-        print("You walk into the town's general store. The shop is full of shelves stocked with various items ranging"
-              "\nfrom weapons and ammunition, to medical supplies and food items. A lioness sits at the counter,"
-              "\nyou find her to be rather cute.")
+        print(
+            "You walk into the town's general store. The shop is full of shelves stocked with various items ranging"
+            "\nfrom weapons and ammunition, to medical supplies and food items. A lioness sits at the counter,"
+            "\nyou find her to be rather cute."
+        )
         print("__________________")
         self.print_look()
         self.print_locations()
@@ -369,6 +411,7 @@ class TownGenStore(FunctionClass):
 
 class TownBathHouse(FunctionClass):
     """town bath house that acts as a small puzzle for getting cleaned up."""
+
     def __init__(self, player_object):
 
         self.inventory = []
@@ -394,6 +437,7 @@ class TownBathHouse(FunctionClass):
 
 class TownGateHouse(FunctionClass):
     """town gate house that allows or denies entry to mansion."""
+
     def __init__(self, player_object):
 
         self.inventory = []
@@ -402,8 +446,10 @@ class TownGateHouse(FunctionClass):
 
         self.shop_inventory = []
         self.look_dict = {"room": self.print_description_room}
-        self.go_dict = {"town center": self.go_town_center,
-                        "mansion": self.go_mansion_foyer}
+        self.go_dict = {
+            "town center": self.go_town_center,
+            "mansion": self.go_mansion_foyer,
+        }
         self.oper_dict = {}
         self.use_dict = {}
 
@@ -424,6 +470,7 @@ class TownGateHouse(FunctionClass):
 # Ruined City rooms
 class RuinedHouse(FunctionClass):
     """A ruined house in the city."""
+
     def __init__(self, player_object):
 
         self.inventory = []
@@ -449,6 +496,7 @@ class RuinedHouse(FunctionClass):
 
 class RuinedStreet(FunctionClass):
     """The main street of the ruined city."""
+
     def __init__(self, player_object):
 
         self.inventory = []
@@ -457,10 +505,12 @@ class RuinedStreet(FunctionClass):
 
         self.shop_inventory = []
         self.look_dict = {"room": self.print_description_room}
-        self.go_dict = {"town center": self.go_town_center,
-                        "ruined house": self.go_ruined_house,
-                        "ruined garage": self.go_ruined_garage,
-                        "ruined office": self.go_ruined_office}
+        self.go_dict = {
+            "town center": self.go_town_center,
+            "ruined house": self.go_ruined_house,
+            "ruined garage": self.go_ruined_garage,
+            "ruined office": self.go_ruined_office,
+        }
         self.oper_dict = {}
         self.use_dict = {}
 
@@ -489,6 +539,7 @@ class RuinedStreet(FunctionClass):
 
 class RuinedOffice(FunctionClass):
     """A ruined office building in the city."""
+
     def __init__(self, player_object):
 
         self.inventory = []
@@ -502,8 +553,10 @@ class RuinedOffice(FunctionClass):
         self.use_dict = {}
 
     def print_description_room(self):
-        print("You walk into the ruined office. The building has collapsed somewhat, having turned into something of"
-              "\na manmade cave. The atmosphere of the room makes you nervous about it's structural integrity.")
+        print(
+            "You walk into the ruined office. The building has collapsed somewhat, having turned into something of"
+            "\na manmade cave. The atmosphere of the room makes you nervous about it's structural integrity."
+        )
         print("__________________")
         self.print_look()
         self.print_locations()
@@ -515,6 +568,7 @@ class RuinedOffice(FunctionClass):
 
 class RuinedGarage(FunctionClass):
     """An old garage in the ruined city."""
+
     def __init__(self, player_object):
 
         self.inventory = []
@@ -523,19 +577,23 @@ class RuinedGarage(FunctionClass):
 
         self.shop_inventory = []
         self.look_dict = {"room": self.print_description_room}
-        self.go_dict = {"ruined street": self.go_ruined_street,
-                        "upstairs": self.go_upstairs_break_room}
+        self.go_dict = {
+            "ruined street": self.go_ruined_street,
+            "upstairs": self.go_upstairs_break_room,
+        }
         self.oper_dict = {}
         self.use_dict = {}
 
     def print_description_room(self):
-        print("You walk into the garage.What was once a thriving automotive workshop has become a time capsule"
-              "\nof the past. By the front roller door sits a car riddled with bullet holes, suggesting that"
-              "\nwhoever owned the business did whatever they could to protect their investment. At the back of"
-              "\nthe workshop sits a much more well preserved car, aside from the engine bay being empty"
-              "\nand small rust spots appearing around the windows. The walls are adorned with banners advertising"
-              "\nbrands the shop stocked, as well as some old car parts and tool cabinets. The floor is strewn"
-              "\nwith empty boxes, tools, bottles and parts. The smell of stale fuel lingers in the air.")
+        print(
+            "You walk into the garage.What was once a thriving automotive workshop has become a time capsule"
+            "\nof the past. By the front roller door sits a car riddled with bullet holes, suggesting that"
+            "\nwhoever owned the business did whatever they could to protect their investment. At the back of"
+            "\nthe workshop sits a much more well preserved car, aside from the engine bay being empty"
+            "\nand small rust spots appearing around the windows. The walls are adorned with banners advertising"
+            "\nbrands the shop stocked, as well as some old car parts and tool cabinets. The floor is strewn"
+            "\nwith empty boxes, tools, bottles and parts. The smell of stale fuel lingers in the air."
+        )
         print("__________________")
         self.print_look()
         self.print_locations()
@@ -551,6 +609,7 @@ class RuinedGarage(FunctionClass):
 # Garage Upstairs
 class UpstairsBreakRoom(FunctionClass):
     """An upstairs break room in the garage."""
+
     def __init__(self, player_object):
 
         self.inventory = []
@@ -559,16 +618,20 @@ class UpstairsBreakRoom(FunctionClass):
 
         self.shop_inventory = []
         self.look_dict = {"room": self.print_description_room}
-        self.go_dict = {"ruined garage": self.go_ruined_garage,
-                        "office": self.go_upstairs_office,
-                        "balcony": self.go_upstairs_balcony}
+        self.go_dict = {
+            "ruined garage": self.go_ruined_garage,
+            "office": self.go_upstairs_office,
+            "balcony": self.go_upstairs_balcony,
+        }
         self.oper_dict = {}
         self.use_dict = {}
 
     def print_description_room(self):
-        print("You walk in to the break room of the garage. There is a table and chairs in the middle of the room."
-              "\nIn one corner is a sink with an old water cooler next to it. In the other corner sits a refrigerator"
-              "\nwith a bench next to it, with an old microwave and some crockery and cutlery.")
+        print(
+            "You walk in to the break room of the garage. There is a table and chairs in the middle of the room."
+            "\nIn one corner is a sink with an old water cooler next to it. In the other corner sits a refrigerator"
+            "\nwith a bench next to it, with an old microwave and some crockery and cutlery."
+        )
         print("__________________")
         self.print_look()
         self.print_locations()
@@ -594,14 +657,18 @@ class UpstairsBalcony(FunctionClass):
 
         self.shop_inventory = []
         self.look_dict = {"room": self.print_description_room}
-        self.go_dict = {"break room": self.go_upstairs_break_room,
-                        "office": self.go_upstairs_office}
+        self.go_dict = {
+            "break room": self.go_upstairs_break_room,
+            "office": self.go_upstairs_office,
+        }
         self.oper_dict = {}
         self.use_dict = {}
 
     def print_description_room(self):
-        print("You walk on to the garage's balcony. You find yourself overlooking the ruined street. There is a table"
-              "\nand chairs with a small ashtray in the middle of the table. In the corner is a now dead pot plant.")
+        print(
+            "You walk on to the garage's balcony. You find yourself overlooking the ruined street. There is a table"
+            "\nand chairs with a small ashtray in the middle of the table. In the corner is a now dead pot plant."
+        )
         print("__________________")
         self.print_look()
         self.print_locations()
@@ -624,16 +691,20 @@ class UpstairsOffice(FunctionClass):
 
         self.shop_inventory = []
         self.look_dict = {"room": self.print_description_room}
-        self.go_dict = {"break room": self.go_upstairs_break_room,
-                        "balcony": self.go_upstairs_balcony}
+        self.go_dict = {
+            "break room": self.go_upstairs_break_room,
+            "balcony": self.go_upstairs_balcony,
+        }
         self.oper_dict = {}
         self.use_dict = {}
 
     def print_description_room(self):
-        print("You walk into the manager's office of the garage. It would appear the place had been ransacked by the"
-              "\nscavengers you scared off. Various documents are strewn across the floor, mostly sales records"
-              "\nand maintenance records for the courtesy cars the shop once owned. A broken computer sits on the"
-              "\ndesk along with an ashtray and a diary. In the corner sits a large safe.")
+        print(
+            "You walk into the manager's office of the garage. It would appear the place had been ransacked by the"
+            "\nscavengers you scared off. Various documents are strewn across the floor, mostly sales records"
+            "\nand maintenance records for the courtesy cars the shop once owned. A broken computer sits on the"
+            "\ndesk along with an ashtray and a diary. In the corner sits a large safe."
+        )
         print("__________________")
         self.print_look()
         self.print_locations()
@@ -649,23 +720,28 @@ class UpstairsOffice(FunctionClass):
 # mansion rooms
 class MansionFoyer(FunctionClass):
     """The entrance to the mansion."""
+
     def __init__(self, player_object):
 
         self.inventory = []
         self.player = player_object
         self.bool_one, self.bool_two, self.bool_three = (False, False, False)
         self.look_dict = {"room": self.print_description_room}
-        self.go_dict = {"gate house": self.go_gate_house,
-                        "kitchen": self.go_mansion_kitchen,
-                        "hallway": self.go_mansion_hallway,
-                        "sun room": self.go_mansion_sun_room}
+        self.go_dict = {
+            "gate house": self.go_gate_house,
+            "kitchen": self.go_mansion_kitchen,
+            "hallway": self.go_mansion_hallway,
+            "sun room": self.go_mansion_sun_room,
+        }
         self.oper_dict = {}
         self.use_dict = {}
 
     def print_description_room(self):
-        print("You walk into the mansion's foyer. It's apparent that the owner is well off, judging by the immaculate"
-              "\nmarble floor and chandelier hanging from the ceiling. The walls are adorned with paintings of the"
-              "\nowner's family, as well as some vintage paintings from the old world.")
+        print(
+            "You walk into the mansion's foyer. It's apparent that the owner is well off, judging by the immaculate"
+            "\nmarble floor and chandelier hanging from the ceiling. The walls are adorned with paintings of the"
+            "\nowner's family, as well as some vintage paintings from the old world."
+        )
         print("__________________")
         self.print_look()
         self.print_locations()
@@ -686,14 +762,17 @@ class MansionFoyer(FunctionClass):
 
 class MansionSunRoom(FunctionClass):
     """A warm sun room in the house."""
+
     def __init__(self, player_object):
 
         self.inventory = []
         self.player = player_object
         self.bool_one, self.bool_two, self.bool_three = (False, False, False)
         self.look_dict = {"room": self.print_description_room}
-        self.go_dict = {"foyer": self.go_mansion_foyer,
-                        "tower entrance": self.go_tower_entrance}
+        self.go_dict = {
+            "foyer": self.go_mansion_foyer,
+            "tower entrance": self.go_tower_entrance,
+        }
         self.oper_dict = {}
         self.use_dict = {}
 
@@ -713,14 +792,17 @@ class MansionSunRoom(FunctionClass):
 
 class MansionKitchen(FunctionClass):
     """A kitchen in the mansion."""
+
     def __init__(self, player_object):
 
         self.inventory = []
         self.player = player_object
         self.bool_one, self.bool_two, self.bool_three = (False, False, False)
         self.look_dict = {"room": self.print_description_room}
-        self.go_dict = {"foyer": self.go_mansion_foyer,
-                        "cellar": self.go_cellar_entrance}
+        self.go_dict = {
+            "foyer": self.go_mansion_foyer,
+            "cellar": self.go_cellar_entrance,
+        }
         self.oper_dict = {}
         self.use_dict = {}
 
@@ -740,14 +822,17 @@ class MansionKitchen(FunctionClass):
 
 class MansionHallWay(FunctionClass):
     """A hallway in the mansion."""
+
     def __init__(self, player_object):
 
         self.inventory = []
         self.player = player_object
         self.bool_one, self.bool_two, self.bool_three = (False, False, False)
         self.look_dict = {"room": self.print_description_room}
-        self.go_dict = {"foyer": self.go_mansion_foyer,
-                        "living room": self.go_mansion_living_room}
+        self.go_dict = {
+            "foyer": self.go_mansion_foyer,
+            "living room": self.go_mansion_living_room,
+        }
         self.oper_dict = {}
         self.use_dict = {}
 
@@ -767,6 +852,7 @@ class MansionHallWay(FunctionClass):
 
 class MansionLivingRoom(FunctionClass):
     """A living room in the mansion."""
+
     def __init__(self, player_object):
 
         self.inventory = []
@@ -791,6 +877,7 @@ class MansionLivingRoom(FunctionClass):
 # tower rooms
 class TowerEntrance(FunctionClass):
     """The entrance to the mansion tower."""
+
     def __init__(self, player_object):
 
         self.inventory = []
@@ -799,7 +886,8 @@ class TowerEntrance(FunctionClass):
         self.look_dict = {"room": self.print_description_room}
         self.go_dict = {
             "tower peak": self.go_tower_peak,
-            "hallway": self.go_mansion_sun_room}
+            "hallway": self.go_mansion_sun_room,
+        }
         self.oper_dict = {}
         self.use_dict = {}
 
@@ -849,9 +937,11 @@ class CellarEntrance(FunctionClass):
         self.player = player_object
         self.bool_one, self.bool_two, self.bool_three = (False, False, False)
         self.look_dict = {"room": self.print_description_room}
-        self.go_dict = {"mansion": self.go_mansion_kitchen,
-                        "wine casks": self.go_wine_casks,
-                        "lab": self.go_lab}
+        self.go_dict = {
+            "mansion": self.go_mansion_kitchen,
+            "wine casks": self.go_wine_casks,
+            "lab": self.go_lab,
+        }
         self.oper_dict = {}
         self.use_dict = {}
 
@@ -925,9 +1015,11 @@ class GeneralStorage(FunctionClass):
         self.player = player_object
         self.bool_one, self.bool_two, self.bool_three = (False, False, False)
         self.look_dict = {"room": self.print_description_room}
-        self.go_dict = {"general store": self.go_general_store,
-                        "work room": self.go_work_room,
-                        "freezer": self.go_freezer}
+        self.go_dict = {
+            "general store": self.go_general_store,
+            "work room": self.go_work_room,
+            "freezer": self.go_freezer,
+        }
         self.oper_dict = {}
         self.use_dict = {}
 
@@ -959,9 +1051,11 @@ class WeaponsStorage(FunctionClass):
         self.use_dict = {}
 
     def print_description_room(self):
-        print("You walk into the general store's weapon storage room. All around you are various types of firearms,"
-              "\nneatly stored on racks that cover both walls. On the floor are various ammo boxes, some of which"
-              "\nyou recognize from your days in the military.")
+        print(
+            "You walk into the general store's weapon storage room. All around you are various types of firearms,"
+            "\nneatly stored on racks that cover both walls. On the floor are various ammo boxes, some of which"
+            "\nyou recognize from your days in the military."
+        )
         print("__________________")
         self.print_look()
         self.print_locations()
@@ -977,9 +1071,11 @@ class WorkRoom(FunctionClass):
         self.player = player_object
         self.bool_one, self.bool_two, self.bool_three = (False, False, False)
         self.look_dict = {"room": self.print_description_room}
-        self.go_dict = {"weapon storage": self.go_weapon_storage,
-                        "general storage": self.go_general_storage,
-                        "freezer": self.go_freezer}
+        self.go_dict = {
+            "weapon storage": self.go_weapon_storage,
+            "general storage": self.go_general_storage,
+            "freezer": self.go_freezer,
+        }
         self.oper_dict = {}
         self.use_dict = {}
 
@@ -1006,16 +1102,20 @@ class Freezer(FunctionClass):
         self.player = player_object
         self.bool_one, self.bool_two, self.bool_three = (False, False, False)
         self.look_dict = {"room": self.print_description_room}
-        self.go_dict = {"general storage": self.go_general_storage,
-                        "work room": self.go_work_room}
+        self.go_dict = {
+            "general storage": self.go_general_storage,
+            "work room": self.go_work_room,
+        }
         self.oper_dict = {}
         self.use_dict = {}
 
     def print_description_room(self):
-        print("You walk into the general store's freezer. Once used to keep perishable items cold, it has been"
-              "\nconverted into a smoking room. On the ceiling hangs some hooks, holding meats such as ham, pork"
-              "\nand several types of smoked fish. On one of the walls is a group of shelves where various types of"
-              "\njerky and peppers are drying out, and on another wall is shelves stocked with smoked cheeses.")
+        print(
+            "You walk into the general store's freezer. Once used to keep perishable items cold, it has been"
+            "\nconverted into a smoking room. On the ceiling hangs some hooks, holding meats such as ham, pork"
+            "\nand several types of smoked fish. On one of the walls is a group of shelves where various types of"
+            "\njerky and peppers are drying out, and on another wall is shelves stocked with smoked cheeses."
+        )
         print("__________________")
         self.print_look()
         self.print_locations()
@@ -1036,8 +1136,10 @@ class InnEntrance(FunctionClass):
         self.room_rented = False
         self.bool_one, self.bool_two, self.bool_three = (False, False, False)
         self.look_dict = {"room": self.print_description_room}
-        self.go_dict = {"town center": self.go_town_center,
-                        "inn room": self.go_inn_room}
+        self.go_dict = {
+            "town center": self.go_town_center,
+            "inn room": self.go_inn_room,
+        }
         self.oper_dict = {}
         self.use_dict = {}
 
@@ -1069,8 +1171,10 @@ class InnRoom(FunctionClass):
         self.ghost_solved = False
 
         self.bool_one, self.bool_two, self.bool_three = (False, False, False)
-        self.look_dict = {"room": self.print_description_room,
-                          "bed": self.print_description_bed}
+        self.look_dict = {
+            "room": self.print_description_room,
+            "bed": self.print_description_bed,
+        }
         self.go_dict = {"inn lobby": self.go_inn_entrance}
         self.oper_dict = {"bed": self.operate_inn_bed}
         self.use_dict = {}
@@ -1130,11 +1234,15 @@ class InnRoom(FunctionClass):
     def find_ghost(self):
         self.ghost_found = True
         print("Please, listen to me. A voice echos to you as you lay in bed.")
-        time.sleep(.5)
+        time.sleep(0.5)
         clear()
-        print("I need you to find my lost family's heirloom."
-              "\nIt's a white mostly see through spirit, your heart races in your chest.")
-        time.sleep(.5)
+        print(
+            "I need you to find my lost family's heirloom."
+            "\nIt's a white mostly see through spirit, your heart races in your chest."
+        )
+        time.sleep(0.5)
         clear()
-        print("Please... Search my office..."
-              "\nThe spirit fades away and you are left wondering if you really did hear what you thought you did.")
+        print(
+            "Please... Search my office..."
+            "\nThe spirit fades away and you are left wondering if you really did hear what you thought you did."
+        )

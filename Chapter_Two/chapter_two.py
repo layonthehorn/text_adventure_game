@@ -4,16 +4,18 @@ from os import path
 import Chapter_Two.chapter_two_section_classes as sections
 import pprint
 import colorama
+
 colorama.init()
 
 
 class ChapterTwo:
     """This is a text adventure game, chapter one. All that is needed is to initialize it with a save directory and a
 command to clear the screen."""
-    under_line = '\033[4m'
+
+    under_line = "\033[4m"
     bold = colorama.Style.BRIGHT
     end = colorama.Style.NORMAL
-    commands = 'Verbs: look, inv(entory), time, wallet, get, oper(ate), com(bine), drop, score, use, go, save, end, help, stat'
+    commands = "Verbs: look, inv(entory), time, wallet, get, oper(ate), com(bine), drop, score, use, go, save, end, help, stat"
 
     def __init__(self, save_dir, clear_func, testing=False):
 
@@ -41,7 +43,9 @@ command to clear the screen."""
         end_game = False
         while choosing:
             print("Chapter Two: Vern in the Big City.")
-            player_option = input("Load(l), Start New(s), Quit(q), or How to play(h)?\n").lower()
+            player_option = input(
+                "Load(l), Start New(s), Quit(q), or How to play(h)?\n"
+            ).lower()
             if player_option == "s":
                 # Loads defaults in classes for game
                 self.player = sections.PlayerClass(testing)
@@ -50,24 +54,26 @@ command to clear the screen."""
                 self.rooms.set_up_npc()
 
                 # to keep a running toll of all actions preformed
-                self.stat_dictionary = {"look": 0,
-                                        "inventory": 0,
-                                        "get": 0,
-                                        "help": 0,
-                                        "": 0,
-                                        "operate": 0,
-                                        "combine": 0,
-                                        "drop": 0,
-                                        "score": 0,
-                                        "use": 0,
-                                        "go": 0,
-                                        "save": 0,
-                                        "hint": 0,
-                                        "end": 0,
-                                        "unknown": 0,
-                                        "stat": 0,
-                                        "time": 0,
-                                        "wallet": 0}
+                self.stat_dictionary = {
+                    "look": 0,
+                    "inventory": 0,
+                    "get": 0,
+                    "help": 0,
+                    "": 0,
+                    "operate": 0,
+                    "combine": 0,
+                    "drop": 0,
+                    "score": 0,
+                    "use": 0,
+                    "go": 0,
+                    "save": 0,
+                    "hint": 0,
+                    "end": 0,
+                    "unknown": 0,
+                    "stat": 0,
+                    "time": 0,
+                    "wallet": 0,
+                }
                 self.print_intro()
                 choosing = False
             elif player_option == "q":
@@ -89,7 +95,9 @@ command to clear the screen."""
                     self.rooms = new_value_dictionary.get("rooms")
 
                     # stat dictionary data
-                    self.stat_dictionary = new_value_dictionary.get(self.stat_dictionary_name)
+                    self.stat_dictionary = new_value_dictionary.get(
+                        self.stat_dictionary_name
+                    )
 
                     # tells player it loaded the game
                     print("Loaded Game.")
@@ -109,10 +117,8 @@ command to clear the screen."""
             self.save_dictionary = {
                 # saving player
                 self.player_name: self.player,
-
                 # saving sections
                 "rooms": self.rooms,
-
                 # saving stats of actions made
                 self.stat_dictionary_name: self.stat_dictionary,
             }
@@ -163,7 +169,7 @@ command to clear the screen."""
     def save_game_state(self):
         try:
             # writes data to save file with pickle
-            with open(self.save_location, 'wb+') as db_file:
+            with open(self.save_location, "wb+") as db_file:
                 pickle.dump(self.save_dictionary, db_file)
             print("Game has been saved!")
         except IOError:
@@ -172,7 +178,7 @@ command to clear the screen."""
     # loading saved game
     def load_game_state(self):
         try:
-            with open(self.save_location, 'rb') as db_file:
+            with open(self.save_location, "rb") as db_file:
                 pickle_db = pickle.load(db_file)
                 return pickle_db
         except FileNotFoundError:
@@ -250,15 +256,17 @@ command to clear the screen."""
         # in case input is blank
         elif action == "":
             self.stat_dictionary[""] += 1
-            print("Vern taps his foot on the ground. \n'I get so sick of waiting for something to happen.'")
+            print(
+                "Vern taps his foot on the ground. \n'I get so sick of waiting for something to happen.'"
+            )
 
         # ends game and asks to save
         elif general_list[0] == "end":
             self.stat_dictionary["end"] += 1
             save = input("Save game? (y/n) ").lower()
-            if save == 'y':
+            if save == "y":
                 self.stat_dictionary["save"] += 1
-                print('Saved!')
+                print("Saved!")
                 self.save_game_state()
             input("Press enter to quit. Goodbye! ")
             self.player.location = self.end_name
@@ -290,7 +298,7 @@ command to clear the screen."""
             self.stat_dictionary["drop"] += 1
             try:
                 # if player tries to drop self print message.
-                if general_list[1] != 'self':
+                if general_list[1] != "self":
                     loc_name.drop_item(general_list[1])
                 else:
                     print("Now how would I do that?")
@@ -302,8 +310,8 @@ command to clear the screen."""
             self.stat_dictionary["combine"] += 1
             # tries to combine items
             choice_list = self.combine_pattern.split(action)
-            if '' in choice_list:
-                choice_list.remove('')
+            if "" in choice_list:
+                choice_list.remove("")
             try:
                 self.player.combine_items(choice_list[0], choice_list[1])
             except IndexError:
@@ -314,8 +322,8 @@ command to clear the screen."""
             self.stat_dictionary["use"] += 1
             try:
                 choice_list = self.use_pattern.split(action)
-                if '' in choice_list:
-                    choice_list.remove('')
+                if "" in choice_list:
+                    choice_list.remove("")
                 loc_name.get_use_commands(choice_list)
             except IndexError:
                 print("Use what with what?")
@@ -361,31 +369,35 @@ command to clear the screen."""
     @staticmethod
     def print_help():
         print("How to play.")
-        print("look {item}: Looks at things. room, map, objects."
-              "\ninv(entory): Checks your inventory and prints descriptions out."
-              "\nget {item}: Gets items from room."
-              "\noper(ate) {object}: How you use/read objects: doors, computers, etc."
-              "\ncom(bine) {item} with/on {item}: allows you to combine items. Use 'self' to use an item on you."
-              "\ndrop {item}: Allows you to get rid of an item."
-              "\nscore: Allows the player to check current progress in-game."
-              "\nuse {item} With/on {item}: how you use things with other things."
-              "\ngo {location}: How you change rooms."
-              "\nsave: How you save your game."
-              "\nend: Exit game and will ask to save or not."
-              "\nhint: This will give you a hint on how to continue."
-              "\nhelp: This menu."
-              "\nstat: Prints stats on commands used.")
+        print(
+            "look {item}: Looks at things. room, map, objects."
+            "\ninv(entory): Checks your inventory and prints descriptions out."
+            "\nget {item}: Gets items from room."
+            "\noper(ate) {object}: How you use/read objects: doors, computers, etc."
+            "\ncom(bine) {item} with/on {item}: allows you to combine items. Use 'self' to use an item on you."
+            "\ndrop {item}: Allows you to get rid of an item."
+            "\nscore: Allows the player to check current progress in-game."
+            "\nuse {item} With/on {item}: how you use things with other things."
+            "\ngo {location}: How you change rooms."
+            "\nsave: How you save your game."
+            "\nend: Exit game and will ask to save or not."
+            "\nhint: This will give you a hint on how to continue."
+            "\nhelp: This menu."
+            "\nstat: Prints stats on commands used."
+        )
 
     def print_intro(self):
         self.clear()
-        print("""
+        print(
+            """
 After a week of travelling from the abandoned mall, Vern, Johnson and Katie arrived at the city of Harrisburg. 
 They were relieved to have finally arrived, as they were in need of supplies, a clean up and a feed. 
 However, this relief was short lived, when Vern realised that his money pouch had got a hole along the way, 
 and had managed to lose all the money they had. After a short argument, the group agreed to try 
 and make back the money they lost by seeing what they could do for the residents of the city, 
 hoping to raise $5000 to get them through to their next destination.
-""")
+"""
+        )
 
     def print_outro(self):
 
@@ -394,7 +406,8 @@ hoping to raise $5000 to get them through to their next destination.
 
     # a formatted print of all commands that have been used
     def print_stats(self):
-        print(f"""
+        print(
+            f"""
 \t\t\t\t\tStatistics Of Command Usage
 
 {"Used 'look'":<16} {self.stat_dictionary["look"]:<4} times. {"":>6} {"Used 'get'":<16} {self.stat_dictionary["get"]:<4} times.
@@ -405,4 +418,5 @@ hoping to raise $5000 to get them through to their next destination.
 {"Used 'score'":<16} {self.stat_dictionary["score"]:<4} times. {"":>6} {"Used 'use'":<16} {self.stat_dictionary["use"]:<4} times.
 {"Used 'go'":<16} {self.stat_dictionary["go"]:<4} times. {"":>6} {"Used 'save'":<16} {self.stat_dictionary["save"]:<4} times.
 {"Used 'hint'":<16} {self.stat_dictionary["hint"]:<4} times. {"":>6} {"Used 'stat'":<16} {self.stat_dictionary["stat"]:<4} times.
-{"Unknown command":<16} {self.stat_dictionary["unknown"]:<4} times. {"":>6} {"Entered nothing":<16} {self.stat_dictionary[""]:<4} times.""")
+{"Unknown command":<16} {self.stat_dictionary["unknown"]:<4} times. {"":>6} {"Entered nothing":<16} {self.stat_dictionary[""]:<4} times."""
+        )

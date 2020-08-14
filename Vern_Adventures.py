@@ -4,10 +4,13 @@ from sys import exit
 import os
 import platform
 import getpass
+
 try:
     import colorama
 except ImportError:
-    print("You need to install colorama for this game to work, please read the manual.\npip install colorama")
+    print(
+        "You need to install colorama for this game to work, please read the manual.\npip install colorama"
+    )
 
 
 # Temporary ascii art from https://ascii.co.uk/art/lion
@@ -31,12 +34,16 @@ ascii_image = """
 
 
 operating = platform.system()
-if (operating == 'Linux' or operating == "Darwin") and not ('ANDROID_ARGUMENT' in os.environ or 'ANDROID_STORAGE' in os.environ):
+if (operating == "Linux" or operating == "Darwin") and not (
+    "ANDROID_ARGUMENT" in os.environ or "ANDROID_STORAGE" in os.environ
+):
     print("Found Linux or Mac.")
     try:
         from xdg import XDG_CONFIG_HOME
     except ImportError:
-        print("You need to install xdg to allow this program to run, please read the manual.\npip install xdg")
+        print(
+            "You need to install xdg to allow this program to run, please read the manual.\npip install xdg"
+        )
         exit(0)
     # save location and clear if on linux or mac
     if XDG_CONFIG_HOME is None:
@@ -44,20 +51,27 @@ if (operating == 'Linux' or operating == "Darwin") and not ('ANDROID_ARGUMENT' i
     else:
         save_dir = f"{XDG_CONFIG_HOME}/vern_saves"
 
+    def clear():
+        os.system("clear")
 
-    def clear(): os.system("clear")
 
-elif operating == 'Windows':
+elif operating == "Windows":
     print("Found Windows.")
     # save location and clear if on windows
     save_dir = f"C:/Users/{getpass.getuser()}/Documents/vern_saves"
-    def clear(): os.system("cls")
 
-elif 'ANDROID_ARGUMENT' in os.environ or 'ANDROID_STORAGE' in os.environ:
+    def clear():
+        os.system("cls")
+
+
+elif "ANDROID_ARGUMENT" in os.environ or "ANDROID_STORAGE" in os.environ:
     print("Found Android.")
     # android system found
     save_dir = os.path.join(os.getcwd(), "vern_saves")
-    def clear(): os.system("clear")
+
+    def clear():
+        os.system("clear")
+
 
 else:
     # unknown system clear screen command
@@ -66,7 +80,9 @@ else:
     save_dir = os.path.join(os.getcwd(), "vern_saves")
     # I can't tell what system it is so
     # I use a lot of new lines instead.
-    def clear(): print("\n" * 100)
+    def clear():
+        print("\n" * 100)
+
 
 try:
     # makes sure the save directory is a thing
