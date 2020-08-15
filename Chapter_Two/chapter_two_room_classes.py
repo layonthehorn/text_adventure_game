@@ -425,7 +425,9 @@ class TownBathHouse(FunctionClass):
         self.use_dict = {}
 
     def print_description_room(self):
-        print("The town center bath house.")
+        print("You walk into the bath house. What was once a relic of the past in the old world has become a part"
+              "\nof common life in the current world. The building is full of people waiting for a chance to clean"
+              "\nthemselves up.")
         print("__________________")
         self.print_look()
         self.print_locations()
@@ -484,7 +486,10 @@ class RuinedHouse(FunctionClass):
         self.use_dict = {}
 
     def print_description_room(self):
-        print("A ruined city house")
+        print("You walked into a ruined house. What was once a man's castle is now a ransacked shell of it's former"
+              "\nglory. The furniture within has been tossed around with reckless abandon, the walls are mildewed"
+              "\nand crumbling. Bits of glass and broken crockery cover the floor, among various other possessions"
+              "\nfrom the previous owner.")
         print("__________________")
         self.print_look()
         self.print_locations()
@@ -515,7 +520,10 @@ class RuinedStreet(FunctionClass):
         self.use_dict = {}
 
     def print_description_room(self):
-        print("A ruined city street.")
+        print("You arrive at a ruined street. You find yourself surrounded by buildings in various states of disrepair,"
+              "\nsome of which you think would crumble at the force of a gentle breeze. The road surface is badly"
+              "\nbroken up badly and burnt out and rusted cars dot the rest of the street, along with all  manner"
+              "\nof rubble and shrapnel that would cut up your delicate paws if you're not careful.")
         print("__________________")
         self.print_look()
         self.print_locations()
